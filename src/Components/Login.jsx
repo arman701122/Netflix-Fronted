@@ -12,21 +12,26 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   /* ---------------- LOGIN ---------------- */
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage("");
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setMessage("");
 
-    try {
-      const res = await api.post("/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      navigate("/netflix-page"); // ✅ redirect
-    } catch (err) {
-      setMessage(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+  console.log("Trying login with:", { email, password }); // 🔹 add this
+
+  try {
+    const res = await api.post("/login", { email, password });
+    console.log("Login response:", res.data); // 🔹 add this
+    localStorage.setItem("token", res.data.token);
+    navigate("/netflix-page"); // ✅ redirect
+  } catch (err) {
+    console.error("Login error:", err.response?.data); // 🔹 add this
+    setMessage(err.response?.data?.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   /* ---------------- FORGOT PASSWORD ---------------- */
   const handleForgot = async (e) => {
