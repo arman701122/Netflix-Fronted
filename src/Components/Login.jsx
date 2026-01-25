@@ -11,29 +11,24 @@ export default function Login() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  /* ---------------- LOGIN ---------------- */
-const handleLogin = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setMessage("");
+  /* ------------ LOGIN ------------ */
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
 
-  console.log("Trying login with:", { email, password }); // 🔹 add this
+    try {
+      const res = await api.post("/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      navigate("/netflix-page");
+    } catch (err) {
+      setMessage(err.response?.data?.message || "Invalid email or password");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  try {
-    const res = await api.post("/login", { email, password });
-    console.log("Login response:", res.data); // 🔹 add this
-    localStorage.setItem("token", res.data.token);
-    navigate("/netflix-page"); // ✅ redirect
-  } catch (err) {
-    console.error("Login error:", err.response?.data); // 🔹 add this
-    setMessage(err.response?.data?.message || "Login failed");
-  } finally {
-    setLoading(false);
-  }
-};
-
-
-  /* ---------------- FORGOT PASSWORD ---------------- */
+  /* ------------ FORGOT ------------ */
   const handleForgot = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -42,93 +37,100 @@ const handleLogin = async (e) => {
       const res = await api.post("/forgot-password", { email });
       setMessage(res.data.message);
     } catch {
-      setMessage("Error sending reset link");
+      setMessage("Unable to send reset link");
     }
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 text-white">
+    <div className="min-h-screen bg-black text-white flex flex-col">
 
-      {/* LOGO */}
-      <h1 className="text-3xl font-bold text-red-600 mb-8">
-        NETFLIX
-      </h1>
+      {/* HEADER */}
+      <header className="px-6 py-4">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+          alt="Netflix"
+          className="h-6 sm:h-8"
+        />
+      </header>
 
-      {/* LOGIN CARD */}
-      <div className="w-full max-w-md bg-black/80 p-8 rounded border border-gray-700">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          {forgot ? "Reset Password" : "Sign In"}
-        </h2>
+      {/* LOGIN BOX */}
+      <main className="flex-1 flex items-center justify-center px-4">
+        <div className="w-full max-w-md bg-black/80 p-6 sm:p-8 rounded-md">
 
-        {message && (
-          <p className="text-center mb-4 text-red-500 text-sm">
-            {message}
-          </p>
-        )}
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+            {forgot ? "Reset Password" : "Sign In"}
+          </h2>
 
-        <form
-          onSubmit={forgot ? handleForgot : handleLogin}
-          className="space-y-4"
-        >
-          <input
-            type="email"
-            placeholder="Email address"
-            className="w-full px-4 py-3 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          {!forgot && (
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full px-4 py-3 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          {message && (
+            <p className="mb-4 text-sm text-red-500">
+              {message}
+            </p>
           )}
 
-          <button
-            disabled={loading}
-            className="w-full bg-red-600 hover:bg-red-700 py-3 rounded font-semibold transition"
+          <form
+            onSubmit={forgot ? handleForgot : handleLogin}
+            className="space-y-4"
           >
-            {loading
-              ? "Please wait..."
-              : forgot
-              ? "Send Reset Link"
-              : "Sign In"}
-          </button>
-        </form>
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
 
-        {/* TOGGLE */}
-        <div className="mt-4 text-sm text-gray-400 text-center">
-          <button
-            onClick={() => setForgot(!forgot)}
-            className="hover:underline"
-          >
-            {forgot ? "Back to Sign In" : "Forgot password?"}
-          </button>
-        </div>
+            {!forgot && (
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
+              />
+            )}
 
-        {/* SIGNUP */}
-        {!forgot && (
-          <p className="mt-6 text-gray-400 text-sm text-center">
-            New to Netflix?{" "}
-            <span
-              onClick={() => navigate("/signup")}
-              className="text-white hover:underline cursor-pointer"
+            <button
+              disabled={loading}
+              className="w-full bg-red-600 hover:bg-red-700 py-3 rounded font-semibold transition"
             >
-              Sign up now
-            </span>
-          </p>
-        )}
-      </div>
+              {loading
+                ? "Signing in..."
+                : forgot
+                ? "Send Reset Link"
+                : "Sign In"}
+            </button>
+          </form>
+
+          {/* TOGGLE */}
+          <div className="mt-4 text-sm text-gray-400">
+            <button
+              onClick={() => setForgot(!forgot)}
+              className="hover:underline"
+            >
+              {forgot ? "Back to Sign In" : "Forgot password?"}
+            </button>
+          </div>
+
+          {/* SIGN UP */}
+          {!forgot && (
+            <p className="mt-6 text-sm text-gray-400">
+              New to Netflix?{" "}
+              <span
+                onClick={() => navigate("/signup")}
+                className="text-white hover:underline cursor-pointer"
+              >
+                Sign up now
+              </span>
+            </p>
+          )}
+        </div>
+      </main>
 
       {/* FOOTER */}
-      <footer className="mt-10 text-xs text-gray-500 max-w-md text-center">
-        <div className="grid grid-cols-2 gap-3">
+      <footer className="px-6 pb-6 text-xs text-gray-500">
+        <div className="max-w-md mx-auto grid grid-cols-2 gap-3">
           {[
             "FAQ",
             "Help Centre",
@@ -143,6 +145,7 @@ const handleLogin = async (e) => {
           ))}
         </div>
       </footer>
+
     </div>
   );
 }

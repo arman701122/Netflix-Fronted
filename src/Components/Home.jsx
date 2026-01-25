@@ -1,5 +1,9 @@
 import { ChevronLeft, ChevronRight, Search, Bell, Play, Info, Volume2, VolumeX } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const movies = [
   {
@@ -143,6 +147,19 @@ export default function Home() {
   const [isMuted, setIsMuted] = useState(true);
   const [scrollY, setScrollY] = useState(0);
 
+ const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    if (!email) return alert("Email required");
+
+    // 🔐 Save email entered on home page
+    localStorage.setItem("preLoginEmail", email);
+
+    navigate("/login");
+  };
+
+
  useEffect(() => {
   const handleResize = () => {
     if (window.innerWidth < 640) {
@@ -188,23 +205,22 @@ const prev = () => {
       : "bg-gradient-to-b from-black/70 to-transparent"
   }`}
 >
-  {/* LOGO */}
-  <h1 className="text-xl sm:text-2xl font-bold text-red-600">
-    NETFLIX
-  </h1>
+ {/* LOGO */}
+<img
+  src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+  alt="Netflix"
+  className="h-6 sm:h-8 w-auto"
+/>
+
 
   {/* RIGHT CONTROLS */}
   <div className="flex items-center gap-3 sm:gap-5">
 
     {/* SEARCH */}
-    <button className="hover:text-red-600 transition">
-      <Search size={20} />
-    </button>
+   
 
     {/* NOTIFICATION */}
-    <button className="hover:text-red-600 transition">
-      <Bell size={20} />
-    </button>
+   
 
     {/* LANGUAGE SELECT */}
     <select
@@ -245,40 +261,48 @@ const prev = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
         
-        <div className="relative z-10 max-w-2xl">
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-4 leading-tight">
-            {language === "en"
-              ? "Unlimited movies, TV shows and more"
-              : "असीमित फ़िल्में और टीवी शो"}
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 text-gray-200">
-            {language === "en"
-              ? "Watch anywhere. Cancel anytime."
-              : "कहीं भी देखें। कभी भी रद्द करें।"}
-          </p>
-          <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
-            <a
-  href="https://www.netflix.com"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded font-bold hover:bg-gray-300 transition flex items-center justify-center gap-2"
->
-  <Play size={20} />
-  <span>{language === "en" ? "Play" : "चलाएं"}</span>
-</a>
+       <div className="relative z-10 max-w-2xl text-left sm:text-left">
+  {/* Heading */}
+  <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4 leading-tight">
+    {language === "en"
+      ? "Unlimited movies, shows, and more"
+      : "अनलिमिटेड फ़िल्में, शो और बहुत कुछ"}
+  </h2>
 
-           <a
-  href="https://www.netflix.com/browse"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-gray-600/50 text-white px-4 sm:px-6 py-2 sm:py-3 rounded font-bold hover:bg-gray-600 transition flex items-center justify-center gap-2"
->
-  <Info size={20} />
-  <span>{language === "en" ? "More Info" : "और जानें"}</span>
-</a>
+  {/* Sub text */}
+  <p className="text-sm sm:text-lg mb-2 text-gray-200">
+    {language === "en"
+      ? "Starts at ₹149. Cancel at any time."
+      : "₹149 से शुरू. कभी भी कैंसल करें."}
+  </p>
 
-          </div>
-        </div>
+  {/* Email text */}
+  <p className="text-xs sm:text-base mb-3 sm:mb-6 text-gray-200">
+    {language === "en"
+      ? "Ready to watch? Enter your email to create or restart your membership."
+      : "देखने के लिए तैयार हैं? अपनी मेंबरशिप शुरू या फिर से चालू करने के लिए ईमेल डालें."}
+  </p>
+
+  {/* Email + Button */}
+   <div className="flex flex-col sm:flex-row gap-2 items-center">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email address"
+        className="w-full sm:w-[380px] px-3 py-2 text-sm rounded bg-black/60 border border-gray-500 text-white"
+      />
+
+      <button
+        onClick={handleStart}
+        className="bg-red-600 px-4 py-2 rounded text-white font-semibold"
+      >
+        Get Started &gt;
+      </button>
+    </div>
+
+</div>
+
       </section>
 
       {/* TRENDING ROW */}
@@ -359,9 +383,69 @@ const prev = () => {
   </div>
 </section>
 
+<section className="bg-black px-4 sm:px-6 lg:px-16 py-12 sm:py-16 border-t border-gray-800">
+  <div className="max-w-6xl mx-auto">
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12">
+      {language === "en" ? "More reasons to join" : "शामिल होने के और कारण"}
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      
+      {/* CARD 1 */}
+      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2">
+          {language === "en" ? "Enjoy on your TV" : "अपने टीवी पर देखें"}
+        </h3>
+        <p className="text-sm sm:text-base text-gray-300">
+          {language === "en"
+            ? "Watch on Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
+            : "स्मार्ट टीवी, प्लेस्टेशन, एक्सबॉक्स, क्रोमकास्ट, एप्पल टीवी और अधिक पर देखें।"}
+        </p>
+      </div>
+
+      {/* CARD 2 */}
+      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2">
+          {language === "en" ? "Download to watch offline" : "ऑफ़लाइन देखने के लिए डाउनलोड करें"}
+        </h3>
+        <p className="text-sm sm:text-base text-gray-300">
+          {language === "en"
+            ? "Save your favourites easily and always have something to watch."
+            : "अपने पसंदीदा शो सेव करें और कभी भी देखें।"}
+        </p>
+      </div>
+
+      {/* CARD 3 */}
+      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2">
+          {language === "en" ? "Watch everywhere" : "हर जगह देखें"}
+        </h3>
+        <p className="text-sm sm:text-base text-gray-300">
+          {language === "en"
+            ? "Stream unlimited movies and TV shows on your phone, tablet, laptop and TV."
+            : "अपने फोन, टैबलेट, लैपटॉप और टीवी पर अनलिमिटेड देखें।"}
+        </p>
+      </div>
+
+      {/* CARD 4 */}
+      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2">
+          {language === "en" ? "Create profiles for kids" : "बच्चों के लिए प्रोफाइल बनाएं"}
+        </h3>
+        <p className="text-sm sm:text-base text-gray-300">
+          {language === "en"
+            ? "Send kids on adventures with their favourite characters in a space made just for them."
+            : "बच्चों के लिए सुरक्षित प्रोफाइल में उनके पसंदीदा किरदार।"}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* FAQ SECTION */}
-      <section className="bg-black px-4 sm:px-6 lg:px-16 py-12 sm:py-16 border-t border-gray-800">
+      <section className="bg-black px-4 sm:px-6 lg:px-16 py-6 sm:py-16 border-t border-gray-800">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10">
             {language === "en"
@@ -391,25 +475,9 @@ const prev = () => {
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="text-center mt-10 sm:mt-12">
-            <p className="text-base sm:text-lg mb-4 sm:mb-6">
-              {language === "en"
-                ? "Ready to watch? Enter your email to create or restart your membership."
-                : "देखने के लिए तैयार हैं? अपनी सदस्यता बनाने या फिर से शुरू करने के लिए ईमेल दर्ज करें।"}
-            </p>
+         
+   
 
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center max-w-2xl mx-auto">
-              <input
-                type="email"
-                placeholder={language === "en" ? "Email address" : "ईमेल पता"}
-                className="flex-1 px-3 sm:px-4 py-3 sm:py-4 rounded bg-gray-800 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-              <button className="bg-red-600 hover:bg-red-700 px-4 sm:px-8 py-3 sm:py-4 rounded font-semibold text-sm sm:text-base transition whitespace-nowrap">
-                {language === "en" ? "Get Started →" : "शुरू करें →"}
-              </button>
-            </div>
-          </div>
         </div>
       </section>
 

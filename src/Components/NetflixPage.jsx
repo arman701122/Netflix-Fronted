@@ -1,32 +1,44 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Play, Search, Bell, User, X, Menu, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Home, Tv, Film, Settings } from "lucide-react";
+
 const movies = [
   {
     id: 1,
-    title: "Stranger Things",
-    description: "A science fiction horror series",
-    image: "https://deadline.com/wp-content/uploads/2025/11/Stranger-Things-5_33a02d.jpg", // HD poster
+    title: "Dune: Part Two",
+    description: "Hollywood sci‑fi epic",
+    image:
+      "https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg",
   },
   {
     id: 2,
-    title: "Avatar",
-    description: "Epic sci-fi adventure",
-    image: "https://upload.wikimedia.org/wikipedia/en/b/b0/Avatar-Teaser-Poster.jpg", // HD movie poster
+    title: "Avatar:Fire And Ash",
+    description: "Epic Hollywood sci‑fi adventure",
+    image:
+      "https://preview.redd.it/avatar-fire-and-ash-concept-art-v0-1erwlhflu5hf1.jpeg?width=1080&crop=smart&auto=webp&s=6606793834fd43cd9944b1f46e7de314d3b51e44", // Official textless Avatar 2 poster
   },
   {
     id: 3,
-    title: "Border 2",
-    description: "Thrilling action drama",
-    image: "https://m.media-amazon.com/images/M/MV5BMTUxZjgwNTItMjQ5Yy00NGU4LTlhMGYtY2ZiN2Y2ZmQ1MTRiXkEyXkFqcGc@._V1_.jpg",
+    title: "Games Of Thrones",
+    description: "Hollywood action war ",
+    image:
+      "https://wallpapers.com/images/hd/throne-jon-snow-game-of-thrones-qyptpol8ztg2ihkb.jpg", // Border 2 first‑look poster released on Independence Day 2025 :contentReference[oaicite:0]{index=0}
   },
   {
     id: 4,
-    title: "Toxic",
-    description: "Dark fairy tale",
-    image: "https://m.media-amazon.com/images/M/MV5BMDZiNzAwZTQtYWIwMC00ODA0LWJiOGMtZTgzZGYzYzMxMDNiXkEyXkFqcGc@._V1_.jpg",
+    title: "Munkar",
+    description: "Horrer ",
+    image:
+      "https://m.media-amazon.com/images/M/MV5BMmJmNmM1ZWUtNWI0ZC00YzRiLWE0YzItYzZhMGMwYjZjYmQ0XkEyXkFqcGc@._V1_.jpg", // First look poster featuring Nayanthara from Toxic (2026) :contentReference[oaicite:1]{index=1}
   },
 ];
+
+
+
+
+
+
 
 
 const categories = {
@@ -73,6 +85,27 @@ export default function NetflixPage() {
   const [playingTrailer, setPlayingTrailer] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const scrollRefs = useRef({});
+
+
+
+const [showBottomNav, setShowBottomNav] = useState(true);
+const lastScrollY = useRef(0);
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > lastScrollY.current) {
+      setShowBottomNav(false); // scroll down → hide
+    } else {
+      setShowBottomNav(true); // scroll up → show
+    }
+    lastScrollY.current = window.scrollY;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
 
   // Filter categories based on search
   const filteredCategories = useMemo(() => {
@@ -129,7 +162,13 @@ export default function NetflixPage() {
       {/* NAVBAR */}
       <nav className="sticky top-0 z-50 bg-black border-b border-gray-800">
         <div className="px-4 py-3 flex items-center justify-between">
-          <h1 className="text-red-600 text-2xl sm:text-3xl font-bold cursor-pointer" onClick={() => navigate("/")}>NETFLIX</h1>
+         <img
+  src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+  alt="Netflix"
+  className="h-7 sm:h-9 w-auto cursor-pointer"
+  onClick={() => navigate("/")}
+/>
+
 
           {/* Desktop */}
           <div className="hidden sm:flex items-center gap-4">
@@ -202,26 +241,49 @@ export default function NetflixPage() {
       </nav>
 
       {/* HERO SLIDER */}
-      <div className="relative h-96 sm:h-[500px] overflow-hidden">
-        {movies.map((movie, i) => (
-          <div
-            key={movie.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}
-          >
-            <img src={movie.image} alt={movie.title} className="w-full h-full object-cover" />
-          </div>
-        ))}
-        {/* Dots */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          {movies.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentSlide(i)}
-              className={`w-3 h-3 rounded-full ${i === currentSlide ? "bg-red-600" : "bg-white/50"}`}
-            />
-          ))}
-        </div>
+ <div className="relative w-full h-screen overflow-hidden bg-black">
+  {movies.map((movie, i) => (
+    <div
+      key={movie.id}
+      className={`absolute inset-0 transition-opacity duration-1000 ${
+        i === currentSlide ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {/* Single HD Image with slight blur and dimming */}
+      <img
+        src={movie.image}
+        alt={movie.title}
+        className="absolute inset-0 w-full h-full object-cover brightness-80 "
+      />
+
+      {/* Title / Description */}
+      <div className="absolute bottom-16 left-8 z-10 text-white max-w-xl">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
+          {movie.title}
+        </h1>
+        <p className="mt-2 text-sm sm:text-lg lg:text-xl">
+          {movie.description}
+        </p>
       </div>
+    </div>
+  ))}
+
+  {/* Navigation Dots */}
+  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+    {movies.map((_, i) => (
+      <button
+        key={i}
+        onClick={() => setCurrentSlide(i)}
+        className={`w-3 h-3 rounded-full transition ${
+          i === currentSlide ? "bg-red-600" : "bg-white/50"
+        }`}
+      />
+    ))}
+  </div>
+</div>
+
+
+
 
       {/* CATEGORIES */}
       <div className="px-4 sm:px-8 py-6 space-y-6 pb-20">
@@ -276,6 +338,65 @@ export default function NetflixPage() {
           </div>
         </div>
       )}
+
+      {/* FIXED NAVBAR (Top / Bottom Auto) */}
+{/* FIXED BOTTOM NAVBAR */}
+<div
+  className={`fixed bottom-0 left-0 right-0 z-50
+  transition-transform duration-300
+  ${showBottomNav ? "translate-y-0" : "translate-y-full"}
+  bg-black/90 border-t border-gray-800`}
+>
+  <div className="flex justify-around items-center py-2">
+
+    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
+      <Home size={22} />
+      <span className="text-xs">Home</span>
+    </button>
+
+    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
+      <Tv size={22} />
+      <span className="text-xs">Series</span>
+    </button>
+
+   {/* NETFLIX CENTER – SVG LOGO */}
+<button
+  onClick={() => navigate("/")}
+  className="bg-black w-14 h-14 flex items-center justify-center rounded-full -mt-8
+  shadow-[0_8px_30px_rgba(220,38,38,0.6)]
+  active:scale-95 transition-transform duration-150"
+>
+  <svg
+    width="26"
+    height="26"
+    viewBox="0 0 512 512"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="translate-y-1"
+  >
+    <path
+      d="M96 32H176L256 224V32H336V480H256L176 288V480H96V32Z"
+      fill="#E50914"
+    />
+  </svg>
+</button>
+
+
+
+    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
+      <Film size={22} />
+      <span className="text-xs">Movies</span>
+    </button>
+
+    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
+      <Settings size={22} />
+      <span className="text-xs">Settings</span>
+    </button>
+
+  </div>
+</div>
+
+
 
       <style>{`
         .hide-scrollbar {
