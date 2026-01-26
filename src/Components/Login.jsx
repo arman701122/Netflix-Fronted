@@ -12,21 +12,32 @@ export default function Login() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage("");
+ const handleLogin = async (e) => {
+  e.preventDefault();
+  if (loading) return;
 
-    try {
-      const res = await api.post("/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      navigate("/netflix-page");
-    } catch (err) {
-      setMessage(err.response?.data?.message || "Invalid email or password");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  setMessage("");
+
+  try {
+    const { data } = await api.post("/login", {
+      email,
+      password,
+    });
+
+    // Save token instantly
+    localStorage.setItem("token", data.token);
+
+    // 🚀 FAST redirect
+    navigate("/netflix-page", { replace: true });
+
+  } catch (err) {
+    setMessage(err.response?.data?.message || "Invalid email or password");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleForgot = async (e) => {
     e.preventDefault();
@@ -94,16 +105,13 @@ export default function Login() {
                 />
               )}
 
-              <button
-                disabled={loading}
-                className="w-full bg-red-600 hover:bg-red-700 py-3 rounded font-semibold text-white transition disabled:opacity-60"
-              >
-                {loading
-                  ? "Please wait..."
-                  : forgot
-                  ? "Send Reset Link"
-                  : "Sign In"}
-              </button>
+             <button
+  disabled={loading}
+  className="w-full bg-red-600 hover:bg-red-700 py-3 rounded font-semibold text-white transition disabled:opacity-60"
+>
+  {loading ? "Signing in..." : "Sign In"}
+</button>
+
             </form>
 
             <div className="flex justify-between items-center mt-4 text-sm text-gray-400">
