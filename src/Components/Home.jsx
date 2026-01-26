@@ -209,33 +209,33 @@ const prev = () => {
 <img
   src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
   alt="Netflix"
-  className="h-6 sm:h-8 w-auto"
+  className="h-6 sm:h-12 w-auto"
 />
 
 
   {/* RIGHT CONTROLS */}
   <div className="flex items-center gap-3 sm:gap-5">
 
-    {/* SEARCH */}
+  
    
 
-    {/* NOTIFICATION */}
-   
+ {/* LANGUAGE SELECT */}
+   <select
+  value={language}
+  onChange={(e) => setLanguage(e.target.value)}
+  className="bg-black text-white border border-gray-600
+             px-4 py-2 text-sm sm:text-base
+             rounded-md min-w-[110px]
+             focus:outline-none hover:border-gray-400 transition"
+>
+  <option value="en" className="bg-black text-white">
+    English
+  </option>
+  <option value="hi" className="bg-black text-white">
+    हिंदी
+  </option>
+</select>
 
-    {/* LANGUAGE SELECT */}
-    <select
-      value={language}
-      onChange={(e) => setLanguage(e.target.value)}
-      className="bg-black text-white border border-gray-600 px-2 py-1 text-xs sm:text-sm rounded
-                 focus:outline-none hover:border-gray-400 transition"
-    >
-      <option value="en" className="bg-black text-white">
-        English
-      </option>
-      <option value="hi" className="bg-black text-white">
-        हिंदी
-      </option>
-    </select>
 
     {/* SIGN IN / SIGN UP */}
     <a
@@ -383,20 +383,25 @@ const prev = () => {
   </div>
 </section>
 
-<section className="bg-black px-4 sm:px-6 lg:px-16 py-12 sm:py-16 border-t border-gray-800">
+<section className="bg-black px-4 sm:px-6 lg:px-16 py-14 sm:py-20 border-t border-gray-800">
   <div className="max-w-6xl mx-auto">
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12">
+
+    {/* Heading */}
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 sm:mb-14">
       {language === "en" ? "More reasons to join" : "शामिल होने के और कारण"}
     </h2>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-      
+    {/* Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
       {/* CARD 1 */}
-      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
-        <h3 className="text-lg sm:text-xl font-semibold mb-2">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
+                      border border-gray-800 p-6 hover:scale-[1.03] transition">
+        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
+        <h3 className="text-lg sm:text-xl font-semibold mb-3">
           {language === "en" ? "Enjoy on your TV" : "अपने टीवी पर देखें"}
         </h3>
-        <p className="text-sm sm:text-base text-gray-300">
+        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
           {language === "en"
             ? "Watch on Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
             : "स्मार्ट टीवी, प्लेस्टेशन, एक्सबॉक्स, क्रोमकास्ट, एप्पल टीवी और अधिक पर देखें।"}
@@ -404,11 +409,15 @@ const prev = () => {
       </div>
 
       {/* CARD 2 */}
-      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
-        <h3 className="text-lg sm:text-xl font-semibold mb-2">
-          {language === "en" ? "Download to watch offline" : "ऑफ़लाइन देखने के लिए डाउनलोड करें"}
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
+                      border border-gray-800 p-6 hover:scale-[1.03] transition">
+        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
+        <h3 className="text-lg sm:text-xl font-semibold mb-3">
+          {language === "en"
+            ? "Download to watch offline"
+            : "ऑफ़लाइन देखने के लिए डाउनलोड करें"}
         </h3>
-        <p className="text-sm sm:text-base text-gray-300">
+        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
           {language === "en"
             ? "Save your favourites easily and always have something to watch."
             : "अपने पसंदीदा शो सेव करें और कभी भी देखें।"}
@@ -416,11 +425,13 @@ const prev = () => {
       </div>
 
       {/* CARD 3 */}
-      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
-        <h3 className="text-lg sm:text-xl font-semibold mb-2">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
+                      border border-gray-800 p-6 hover:scale-[1.03] transition">
+        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
+        <h3 className="text-lg sm:text-xl font-semibold mb-3">
           {language === "en" ? "Watch everywhere" : "हर जगह देखें"}
         </h3>
-        <p className="text-sm sm:text-base text-gray-300">
+        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
           {language === "en"
             ? "Stream unlimited movies and TV shows on your phone, tablet, laptop and TV."
             : "अपने फोन, टैबलेट, लैपटॉप और टीवी पर अनलिमिटेड देखें।"}
@@ -428,11 +439,15 @@ const prev = () => {
       </div>
 
       {/* CARD 4 */}
-      <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 transition">
-        <h3 className="text-lg sm:text-xl font-semibold mb-2">
-          {language === "en" ? "Create profiles for kids" : "बच्चों के लिए प्रोफाइल बनाएं"}
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
+                      border border-gray-800 p-6 hover:scale-[1.03] transition">
+        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
+        <h3 className="text-lg sm:text-xl font-semibold mb-3">
+          {language === "en"
+            ? "Create profiles for kids"
+            : "बच्चों के लिए प्रोफाइल बनाएं"}
         </h3>
-        <p className="text-sm sm:text-base text-gray-300">
+        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
           {language === "en"
             ? "Send kids on adventures with their favourite characters in a space made just for them."
             : "बच्चों के लिए सुरक्षित प्रोफाइल में उनके पसंदीदा किरदार।"}
@@ -442,6 +457,7 @@ const prev = () => {
     </div>
   </div>
 </section>
+
 
 
       {/* FAQ SECTION */}
@@ -487,7 +503,7 @@ const prev = () => {
           <p className="mb-6">
             {language === "en" ? "Questions? Call" : "सवाल? कॉल करें"}{" "}
             <a href="tel:000-800-040-1843" className="hover:text-white transition">
-              000-800-040-1843
+              70-11-22-7136
             </a>
           </p>
 

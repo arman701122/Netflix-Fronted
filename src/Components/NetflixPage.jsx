@@ -3,6 +3,9 @@ import { Play, Search, Bell, User, X, Menu, ChevronLeft, ChevronRight } from "lu
 import { useNavigate } from "react-router-dom";
 import { Home, Tv, Film, Settings } from "lucide-react";
 
+import { Link,} from "react-router-dom";
+
+
 const movies = [
   {
     id: 1,
@@ -43,36 +46,61 @@ const movies = [
 
 const categories = {
   Hollywood: [
-    { id: 1, title: "Murder Mystery", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb-v2p19IpAXJ1sa1bTNlW8UhP7cP258MtfA&s", trailer: "https://www.youtube.com/embed/ELeMaP8EPAA" },
-    { id: 2, title: "The Irishman", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfXS9T5q4DIce28B2Nx8QJpP7sR7bfblF-g&s", trailer: "https://www.youtube.com/embed/WHXxVmeKQKE" },
-    { id: 3, title: "Dark", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6N9WKvhdxIL1V2WyhMNfEcrM51o04o9T7fg&s", trailer: "https://www.youtube.com/embed/ky8HHR3AQLU" },
-    { id: 4, title: "Growing Deon", img: "https://images.justwatch.com/backdrop/262865297/s640/raising-dion", trailer: "https://www.youtube.com/embed/9L1B0VZVj9g" },
-    { id: 13, title: "Avengers", img: "https://cdn.britannica.com/60/182360-050-CD8878D6/Avengers-Age-of-Ultron-Joss-Whedon.jpg", trailer: "https://www.youtube.com/embed/tmeOjFno6Do" },
-    { id: 14, title: "Stranger Things", img: "https://deadline.com/wp-content/uploads/2025/11/Stranger-Things-5_33a02d.jpg?w=1024", trailer: "https://www.youtube.com/embed/b9ncQlWcBcY" },
+    {
+  id: 1,
+  title: "Murder Mystery",
+  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb-v2p19IpAXJ1sa1bTNlW8UhP7cP258MtfA&s",
+  trailer: "https://www.youtube.com/embed/5YEVQDr2f3Q"
+},
+
+    { id: 2, title: "The Irishman", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfXS9T5q4DIce28B2Nx8QJpP7sR7bfblF-g&s", trailer: "https://www.youtube.com/embed/WHXxVmeGQUc" },
+
+    { id: 3, title: "Dark", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6N9WKvhdxIL1V2WyhMNfEcrM51o04o9T7fg&s", trailer: "https://www.youtube.com/embed/ESEUoa-mz2c" },
+
+    { id: 4, title: "ANACONDA", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIm0bRXWXp0mV6ruez85dhyHzYxiqDs7ALSQ&s", trailer: "https://www.youtube.com/embed/q0UxtQfgz0A" },
+
+    { id: 13, title: "Avengers", img: "https://cdn.britannica.com/60/182360-050-CD8878D6/Avengers-Age-of-Ultron-Joss-Whedon.jpg", trailer: "https://www.youtube.com/embed/6ZfuNTqbHE8" },
+
+    { id: 14, title: "Stranger Things", img: "https://deadline.com/wp-content/uploads/2025/11/Stranger-Things-5_33a02d.jpg?w=1024", trailer: "https://www.youtube.com/embed/W8I27RPPt-k" },
   ],
   Bollywood: [
-    { id: 5, title: "Marjawa", img: "https://www.koimoi.com/wp-content/new-galleries/2019/11/box-office-marjaavaan-to-take-a-decent-opening-single-screens-are-the-key-on-the-first-day-001.jpg", trailer: "https://www.youtube.com/embed/LfqLRxiXqQw" },
-    { id: 6, title: "Ek Deewane Ki Deewaniyat", img: "https://c.saavncdn.com/532/Deewaniyat-From-Ek-Deewane-Ki-Deewaniyat-Original-Motion-Picture-Soundtrack-Hindi-2025-20250827010315-500x500.jpg", trailer: "https://www.youtube.com/embed/WLVNhz5rWcw" },
-    { id: 7, title: "Saiyara", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmkrtRPzlwbYqEmj3P3siCZeEPYNy25rIVkw&s", trailer: "https://www.youtube.com/embed/6JnN1DmbqoE" },
-    { id: 8, title: "Sikandar", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-YDVd4PxrdgK1r7Y_i2MT5U9ZCiOncSTyBA&s", trailer: "https://www.youtube.com/embed/dKCL_d6ZCUA" },
-    { id: 15, title: "Border 2", img: "https://m.media-amazon.com/images/M/MV5BMTUxZjgwNTItMjQ5Yy00NGU4LTlhMGYtY2ZiN2Y2ZmQ1MTRiXkEyXkFqcGc@._V1_.jpg", trailer: "https://www.youtube.com/embed/qLCfKEDEPOA" },
-    { id: 16, title: "12 Fail", img: "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/690de3e84d854e0e7600479d/images/LANDSCAPE_169/1640216-h-6b1d26b33811?o=production", trailer: "https://www.youtube.com/embed/FkT9sR2B11k" },
+    { id: 5, title: "Marjawa", img: "https://www.koimoi.com/wp-content/new-galleries/2019/11/box-office-marjaavaan-to-take-a-decent-opening-single-screens-are-the-key-on-the-first-day-001.jpg", trailer: "https://www.youtube.com/embed/L7TbPUOn1hc" },
+
+    { id: 6, title: "Ek Deewane Ki Deewaniyat", img: "https://c.saavncdn.com/532/Deewaniyat-From-Ek-Deewane-Ki-Deewaniyat-Original-Motion-Picture-Soundtrack-Hindi-2025-20250827010315-500x500.jpg", trailer: "https://www.youtube.com/embed/y9jtbWNAvXc" },
+
+    { id: 7, title: "Saiyara", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmkrtRPzlwbYqEmj3P3siCZeEPYNy25rIVkw&s", trailer: "https://www.youtube.com/embed/AjzwZ7trRGg" },
+
+    { id: 8, title: "Sikandar", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-YDVd4PxrdgK1r7Y_i2MT5U9ZCiOncSTyBA&s", trailer: "https://www.youtube.com/embed/4_FGQP9g02k" },
+
+    { id: 15, title: "Border 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZY0ipr9LcZzsM802YqCRL9Ie3vCj9e8Lrqw&s", trailer: "https://www.youtube.com/embed/BgfL0zJnPug" },
+
+    { id: 16, title: "12 Fail", img: "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/690de3e84d854e0e7600479d/images/LANDSCAPE_169/1640216-h-6b1d26b33811?o=production", trailer: "https://www.youtube.com/embed/avD8D0q7gIw" },
   ],
   Chinese: [
-    { id: 9, title: "Crouching Tiger", img: "https://images.justwatch.com/backdrop/336164598/s640/crouching-tiger-hidden-dragon-sword-of-destiny", trailer: "https://www.youtube.com/embed/d0aIqx1MCgA" },
-    { id: 10, title: "The Lord of Dragon", img: "https://m.media-amazon.com/images/I/91n7D2tvgML._AC_UF894,1000_QL80_.jpg", trailer: "https://www.youtube.com/embed/9qDdYVRIDT4" },
-    { id: 11, title: "Ip Man", img: "https://m.media-amazon.com/images/M/MV5BOGVjMDEzNjMtMWJmMy00NDdjLWFkMzItOTBhZTE3OWU0YmM4XkEyXkFqcGc@._V1_.jpg", trailer: "https://www.youtube.com/embed/EYVEh_TnbNg" },
-    { id: 12, title: "The Wandering Earth", img: "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3353/1736871863353-i", trailer: "https://www.youtube.com/embed/mJnKmE5rddE" },
-    { id: 17, title: "The Monkey King", img: "https://images.justwatch.com/poster/35414272/s718/the-monkey-king.jpg", trailer: "https://www.youtube.com/embed/pOF5aEwKF9I" },
-    { id: 18, title: "Journey to the West", img: "https://m.media-amazon.com/images/M/MV5BYTM2ZDliMjEtZmUyYy00Zjk0LWJhZWQtYTYwMzBlZjA3ZTNlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/embed/0MXYjAYH8NU" },
+    { id: 9, title: "Crouching Tiger", img: "https://images.justwatch.com/backdrop/336164598/s640/crouching-tiger-hidden-dragon-sword-of-destiny", trailer: "https://www.youtube.com/embed/a3sQIjbrMQw" },
+
+    { id: 10, title: " Lord of the Monster", img: "https://m.media-amazon.com/images/I/91n7D2tvgML._AC_UF894,1000_QL80_.jpg", trailer: "https://www.youtube.com/embed/QNFQo2575pI" },
+
+    { id: 11, title: "Ip Man 2", img: "https://m.media-amazon.com/images/M/MV5BOGVjMDEzNjMtMWJmMy00NDdjLWFkMzItOTBhZTE3OWU0YmM4XkEyXkFqcGc@._V1_.jpg", trailer: "https://www.youtube.com/embed/LSXdo4TTJ9A" },
+
+    { id: 12, title: "The Wandering Earth", img: "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3353/1736871863353-i", trailer: "https://www.youtube.com/embed/0TDII5IkI3Y" },
+
+    { id: 17, title: "The Monkey King", img: "https://images.justwatch.com/poster/35414272/s718/the-monkey-king.jpg", trailer: "https://www.youtube.com/embed/8InLhRjFJVU" },
+
+    { id: 18, title: "Journey to the West", img: "https://m.media-amazon.com/images/M/MV5BYTM2ZDliMjEtZmUyYy00Zjk0LWJhZWQtYTYwMzBlZjA3ZTNlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/embed/FJmAlL3AYHI" },
   ],
   Horror: [
-    { id: 25, title: "The Conjuring", img: "https://m.media-amazon.com/images/M/MV5BM2U2NGE1OWQtN2FjNi00YmQ2LTliMDAtNzMyYzQ5YTJiNDFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/embed/k10ETZ41T5U" },
-    { id: 26, title: "Annabelle", img: "https://upload.wikimedia.org/wikipedia/en/9/90/Annabelle_film_poster.jpg", trailer: "https://www.youtube.com/embed/Ot8pWtIXIek" },
-    { id: 27, title: "IT", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfapkG2cy_IORECaazv_H8ameBppdWB4c_oA&s", trailer: "https://www.youtube.com/embed/9Cg0_PbSmJI" },
-    { id: 28, title: "1920", img: "https://m.media-amazon.com/images/I/816YpgC5GoL._AC_UF1000,1000_QL80_.jpg", trailer: "https://www.youtube.com/embed/QJVhIwzXpJA" },
-    { id: 29, title: "1920 Evils Returns", img: "https://m.media-amazon.com/images/M/MV5BZjRjNDJhMWEtNmJkMi00ZDViLWE1YmEtYzFhZWRjZTI4ZjQ2XkEyXkFqcGc@._V1_.jpg", trailer: "https://www.youtube.com/embed/Vm28V3w5uM4" },
-    { id: 30, title: "Evil Dead Rise", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsn77DDb-bL2sJKUDWLluNyRnEH1KW92eEA&s", trailer: "https://www.youtube.com/embed/GY4BgdUSpbE" },
+    { id: 25, title: "The Conjuring", img: "https://m.media-amazon.com/images/M/MV5BM2U2NGE1OWQtN2FjNi00YmQ2LTliMDAtNzMyYzQ5YTJiNDFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/embed/FSAz556s0fM" },
+
+    { id: 26, title: "Annabelle", img: "https://upload.wikimedia.org/wikipedia/en/9/90/Annabelle_film_poster.jpg", trailer: "https://www.youtube.com/embed/paFgQNPGlsg" },
+
+    { id: 27, title: "IT", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfapkG2cy_IORECaazv_H8ameBppdWB4c_oA&s", trailer: "https://www.youtube.com/embed/xKJmEC5ieOk" },
+
+    { id: 28, title: "1920", img: "https://m.media-amazon.com/images/I/816YpgC5GoL._AC_UF1000,1000_QL80_.jpg", trailer: "https://www.youtube.com/embed/GZrsEBQuhO0" },
+
+    { id: 29, title: "1920 Evils Returns", img: "https://m.media-amazon.com/images/M/MV5BZjRjNDJhMWEtNmJkMi00ZDViLWE1YmEtYzFhZWRjZTI4ZjQ2XkEyXkFqcGc@._V1_.jpg", trailer: "https://www.youtube.com/embed/dxK0Z_VaLtk" },
+
+    { id: 30, title: "Evil Dead Rise", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsn77DDb-bL2sJKUDWLluNyRnEH1KW92eEA&s", trailer: "https://www.youtube.com/embed/4weFxATBEiY" },
   ],
 };
 
@@ -160,85 +188,154 @@ useEffect(() => {
     <div className="bg-black text-white min-h-screen">
 
       {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 bg-black border-b border-gray-800">
-        <div className="px-4 py-3 flex items-center justify-between">
-         <img
-  src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-  alt="Netflix"
-  className="h-7 sm:h-9 w-auto cursor-pointer"
-  onClick={() => navigate("/")}
-/>
+  
+<nav className="sticky top-0 z-50 bg-black/90 backdrop-blur border-b border-gray-800">
+  <div className="px-4 sm:px-6 py-3 flex items-center justify-between">
 
+    {/* LEFT */}
+    <div className="flex items-center gap-6">
+      <Link to="/">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+          alt="Netflix"
+          className="h-7 sm:h-10 cursor-pointer"
+        />
+      </Link>
 
-          {/* Desktop */}
-          <div className="hidden sm:flex items-center gap-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="bg-gray-800 text-white px-3 py-1 rounded-lg text-sm w-48 focus:outline-none focus:ring-2 focus:ring-red-600"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-            <Bell size={22} className="hover:text-red-600 cursor-pointer" />
-            <User size={22} className="hover:text-red-600 cursor-pointer" />
-            <button
-              className="bg-red-600 hover:bg-red-700 px-4 py-1 rounded font-semibold"
-              onClick={() => navigate("/login")}
-            >
-              Logout
-            </button>
-          </div>
+      {/* Desktop Nav (optional later) */}
+      <div className="hidden md:flex gap-4 text-sm text-gray-300">
+        <span className="hover:text-white cursor-pointer">Home</span>
+        <span className="hover:text-white cursor-pointer">TV Shows</span>
+        <span className="hover:text-white cursor-pointer">Movies</span>
+      </div>
+    </div>
 
-          {/* Mobile */}
-          <div className="sm:hidden flex items-center gap-3">
-            <button onClick={() => setShowSearch(!showSearch)}>
-              <Search size={20} />
-            </button>
-            <button onClick={() => setMenuOpen(!menuOpen)}>
-              <Menu size={20} />
-            </button>
-          </div>
+    {/* RIGHT – Desktop */}
+    <div className="hidden sm:flex items-center gap-5">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Search"
+          className="bg-gray-800 text-white px-3 py-1.5 rounded-md text-sm w-48
+                     focus:outline-none focus:ring-2 focus:ring-red-600"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+      </div>
+
+      <Bell className="cursor-pointer hover:text-red-600" size={20} />
+
+      {/* Profile */}
+      <div className="relative group">
+        <User className="cursor-pointer hover:text-red-600" size={22} />
+
+        {/* Dropdown */}
+        <div className="absolute right-0 mt-3 w-40 bg-black border border-gray-800
+                        rounded shadow-lg opacity-0 group-hover:opacity-100
+                        invisible group-hover:visible transition">
+          <button className="w-full px-4 py-2 text-sm text-left hover:bg-gray-800">
+            Profile
+          </button>
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/login");
+            }}
+            className="w-full px-4 py-2 text-sm text-left text-red-500 hover:bg-gray-800"
+          >
+            Logout
+          </button>
         </div>
+      </div>
+    </div>
 
-        {/* Mobile Search */}
-        {showSearch && (
-          <div className="sm:hidden px-4 py-2 border-t border-gray-800">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full bg-gray-800 text-white px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-600"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                autoFocus
-              />
-              {search && (
-                <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <X size={18} />
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+    {/* Mobile Buttons */}
+    <div className="sm:hidden flex items-center gap-4">
+      <button onClick={() => setShowSearch(!showSearch)}>
+        <Search size={20} />
+      </button>
+      <button onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <X size={22} /> : <Menu size={22} />}
+      </button>
+    </div>
+  </div>
 
-        {/* Mobile Menu */}
-        {menuOpen && (
-          <div className="sm:hidden px-4 py-2 border-t border-gray-800 space-y-2">
-            <button className="w-full flex items-center gap-2 hover:text-red-600 text-sm">
-              <Bell size={18} /> Notifications
-            </button>
-            <button className="w-full flex items-center gap-2 hover:text-red-600 text-sm">
-              <User size={18} /> Profile
-            </button>
-            <button
-              className="w-full bg-red-600 hover:bg-red-700 py-1 rounded font-semibold"
-              onClick={() => navigate("/login")}
-            >
-              Logout
-            </button>
-          </div>
-        )}
-      </nav>
+  {/* Mobile Search */}
+  {showSearch && (
+    <div className="sm:hidden px-4 pb-3 border-t border-gray-800">
+      <input
+        type="text"
+        placeholder="Search"
+        className="w-full bg-gray-800 text-white px-3 py-2 rounded-md text-sm
+                   focus:outline-none focus:ring-2 focus:ring-red-600"
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        autoFocus
+      />
+    </div>
+  )}
+
+  {/* Mobile Menu */}
+ {menuOpen && (
+  <div className="sm:hidden px-4 py-4 border-t border-gray-800 space-y-4 text-sm">
+
+    {/* Mobile Nav Links */}
+    <div className="flex flex-col gap-3 text-gray-300">
+      <span
+        onClick={() => {
+          navigate("/");
+          setMenuOpen(false);
+        }}
+        className="hover:text-white cursor-pointer"
+      >
+        Home
+      </span>
+
+      <span
+        onClick={() => {
+          navigate("/tv-shows");
+          setMenuOpen(false);
+        }}
+        className="hover:text-white cursor-pointer"
+      >
+        TV Shows
+      </span>
+
+      <span
+        onClick={() => {
+          navigate("/movies");
+          setMenuOpen(false);
+        }}
+        className="hover:text-white cursor-pointer"
+      >
+        Movies
+      </span>
+    </div>
+
+    <hr className="border-gray-800" />
+
+    {/* Other Actions */}
+    <button className="flex items-center gap-2 hover:text-red-600">
+      <Bell size={18} /> Notifications
+    </button>
+
+    <button className="flex items-center gap-2 hover:text-red-600">
+      <User size={18} /> Profile
+    </button>
+
+    <button
+      onClick={() => {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }}
+      className="w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold"
+    >
+      Logout
+    </button>
+  </div>
+)}
+
+</nav>
 
       {/* HERO SLIDER */}
  <div className="relative w-full h-screen overflow-hidden bg-black">
@@ -367,19 +464,26 @@ useEffect(() => {
   active:scale-95 transition-transform duration-150"
 >
   <svg
-    width="26"
-    height="26"
-    viewBox="0 0 512 512"
-    fill="none"
+    viewBox="0 0 300 300"
+    width="28"
+    height="28"
     xmlns="http://www.w3.org/2000/svg"
-    className="translate-y-1"
+    className="translate-y-[2px]"
   >
-    <path
-      d="M96 32H176L256 224V32H336V480H256L176 288V480H96V32Z"
-      fill="#E50914"
+    {/* Left bar */}
+    <rect x="40" y="20" width="45" height="260" fill="#E50914" />
+
+    {/* Diagonal middle */}
+    <polygon
+      points="85,20 135,20 215,280 165,280"
+      fill="#B20710"
     />
+
+    {/* Right bar */}
+    <rect x="215" y="20" width="45" height="260" fill="#E50914" />
   </svg>
 </button>
+
 
 
 
@@ -395,6 +499,55 @@ useEffect(() => {
 
   </div>
 </div>
+
+
+<footer className="bg-black text-gray-400 text-sm mt-10">
+  <div className="max-w-6xl mx-auto px-6 py-10">
+
+    {/* Top Text */}
+    <p className="mb-6">
+      Questions? Call{" "}
+      <span className="hover:underline cursor-pointer">
+        70-11-22-7136
+      </span>
+    </p>
+
+    {/* Links */}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      {[
+        "FAQ",
+        "Help Centre",
+        "Account",
+        "Media Centre",
+        "Investor Relations",
+        "Jobs",
+        "Ways to Watch",
+        "Terms of Use",
+        "Privacy",
+        "Cookie Preferences",
+        "Corporate Information",
+        "Contact Us",
+        "Speed Test",
+        "Legal Notices",
+        "Only on Netflix",
+      ].map((item) => (
+        <span
+          key={item}
+          className="hover:underline cursor-pointer"
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+
+    
+
+    {/* Country */}
+    <p className="mt-6 text-xs text-gray-500">
+      Netflix India
+    </p>
+  </div>
+</footer>
 
 
 
