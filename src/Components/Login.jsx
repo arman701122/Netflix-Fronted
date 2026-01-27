@@ -12,31 +12,24 @@ export default function Login() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
- const handleLogin = async (e) => {
+const handleLogin = async (e) => {
   e.preventDefault();
-  if (loading) return;
-
   setLoading(true);
   setMessage("");
 
   try {
-    const { data } = await api.post("/login", {
-      email,
-      password,
-    });
+    const res = await api.post("/login", { email, password });
 
-    // Save token instantly
-    localStorage.setItem("token", data.token);
-
-    // 🚀 FAST redirect
-    navigate("/netflix-page", { replace: true });
+    localStorage.setItem("token", res.data.token);
+    navigate("/dashboard", { replace: true });
 
   } catch (err) {
-    setMessage(err.response?.data?.message || "Invalid email or password");
+    setMessage(err.response?.data?.message || "Login failed");
   } finally {
     setLoading(false);
   }
 };
+
 
 
   const handleForgot = async (e) => {

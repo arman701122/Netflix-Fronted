@@ -3,7 +3,8 @@ import './App.css'
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import ResetPassword from "./Components/ResetPassword";
-import NetflixPage from "./Components/NetflixPage";
+import Dashboard from "./Components/Dashboard";
+
 
 
 
@@ -17,7 +18,7 @@ function App() {
        <Route path="/" element={<Home/>}></Route>
        <Route path="/login" element={<Login/>}></Route>
        <Route path="/reset-password/:token" element={<ResetPassword/>}></Route>
-       <Route path="/netflix-page" element={<NetflixPage/>}></Route>
+       <Route path="/dashboard" element={<Dashboard/>}></Route>
 
 
       </Routes>

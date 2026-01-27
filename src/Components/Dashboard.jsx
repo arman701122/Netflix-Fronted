@@ -105,7 +105,7 @@ const categories = {
 };
 
 
-export default function NetflixPage() {
+export default function Dashboard() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
