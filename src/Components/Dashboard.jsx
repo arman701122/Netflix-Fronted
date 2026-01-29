@@ -1,10 +1,18 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
-import { Play, Search, Bell, User, X, Menu, ChevronLeft, ChevronRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import {
+  Play,
+  Search,
+  Bell,
+  User,
+  X,
+  Menu,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  LogOut,
+} from "lucide-react";
 import { Home, Tv, Film, Settings } from "lucide-react";
-
-import { Link,} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const movies = [
   {
@@ -16,144 +24,266 @@ const movies = [
   },
   {
     id: 2,
-    title: "Avatar:Fire And Ash",
+    title: "Avatar: Fire And Ash",
     description: "Epic Hollywood sci‑fi adventure",
     image:
-      "https://preview.redd.it/avatar-fire-and-ash-concept-art-v0-1erwlhflu5hf1.jpeg?width=1080&crop=smart&auto=webp&s=6606793834fd43cd9944b1f46e7de314d3b51e44", // Official textless Avatar 2 poster
+      "https://knightedgemedia.com/wp-content/uploads/2025/07/avatar-fire-and-ash-teaser-trailer-banner.jpg",
   },
   {
     id: 3,
     title: "Games Of Thrones",
-    description: "Hollywood action war ",
+    description: "Hollywood action war",
     image:
-      "https://wallpapers.com/images/hd/throne-jon-snow-game-of-thrones-qyptpol8ztg2ihkb.jpg", // Border 2 first‑look poster released on Independence Day 2025 :contentReference[oaicite:0]{index=0}
+      "https://wallpapers.com/images/hd/throne-jon-snow-game-of-thrones-qyptpol8ztg2ihkb.jpg",
   },
   {
     id: 4,
     title: "Munkar",
-    description: "Horrer ",
+    description: "Horror",
     image:
-      "https://m.media-amazon.com/images/M/MV5BMmJmNmM1ZWUtNWI0ZC00YzRiLWE0YzItYzZhMGMwYjZjYmQ0XkEyXkFqcGc@._V1_.jpg", // First look poster featuring Nayanthara from Toxic (2026) :contentReference[oaicite:1]{index=1}
+      "https://m.media-amazon.com/images/M/MV5BMmJmNmM1ZWUtNWI0ZC00YzRiLWE0YzItYzZhMGMwYjZjYmQ0XkEyXkFqcGc@._V1_.jpg",
   },
 ];
-
-
-
-
-
-
-
 
 const categories = {
   Hollywood: [
     {
-  id: 1,
-  title: "Murder Mystery",
-  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb-v2p19IpAXJ1sa1bTNlW8UhP7cP258MtfA&s",
-  trailer: "https://www.youtube.com/embed/5YEVQDr2f3Q"
-},
-
-    { id: 2, title: "The Irishman", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfXS9T5q4DIce28B2Nx8QJpP7sR7bfblF-g&s", trailer: "https://www.youtube.com/embed/WHXxVmeGQUc" },
-
-    { id: 3, title: "Dark", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6N9WKvhdxIL1V2WyhMNfEcrM51o04o9T7fg&s", trailer: "https://www.youtube.com/embed/ESEUoa-mz2c" },
-
-    { id: 4, title: "ANACONDA", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIm0bRXWXp0mV6ruez85dhyHzYxiqDs7ALSQ&s", trailer: "https://www.youtube.com/embed/q0UxtQfgz0A" },
-
-    { id: 13, title: "Avengers", img: "https://cdn.britannica.com/60/182360-050-CD8878D6/Avengers-Age-of-Ultron-Joss-Whedon.jpg", trailer: "https://www.youtube.com/embed/6ZfuNTqbHE8" },
-
-    { id: 14, title: "Stranger Things", img: "https://deadline.com/wp-content/uploads/2025/11/Stranger-Things-5_33a02d.jpg?w=1024", trailer: "https://www.youtube.com/embed/W8I27RPPt-k" },
+      id: 1,
+      title: "Murder Mystery",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb-v2p19IpAXJ1sa1bTNlW8UhP7cP258MtfA&s",
+      trailer: "https://www.youtube.com/embed/5YEVQDr2f3Q",
+    },
+    {
+      id: 2,
+      title: "The Irishman",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfXS9T5q4DIce28B2Nx8QJpP7sR7bfblF-g&s",
+      trailer: "https://www.youtube.com/embed/WHXxVmeGQUc",
+    },
+    {
+      id: 3,
+      title: "Dark",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6N9WKvhdxIL1V2WyhMNfEcrM51o04o9T7fg&s",
+      trailer: "https://www.youtube.com/embed/ESEUoa-mz2c",
+    },
+    {
+      id: 4,
+      title: "ANACONDA",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIm0bRXWXp0mV6ruez85dhyHzYxiqDs7ALSQ&s",
+      trailer: "https://www.youtube.com/embed/q0UxtQfgz0A",
+    },
+    {
+      id: 13,
+      title: "Avengers",
+      img: "https://cdn.britannica.com/60/182360-050-CD8878D6/Avengers-Age-of-Ultron-Joss-Whedon.jpg",
+      trailer: "https://www.youtube.com/embed/6ZfuNTqbHE8",
+    },
+    {
+      id: 14,
+      title: "Stranger Things",
+      img: "https://deadline.com/wp-content/uploads/2025/11/Stranger-Things-5_33a02d.jpg?w=1024",
+      trailer: "https://www.youtube.com/embed/PssKpzB0Ah0",
+    },
   ],
   Bollywood: [
-    { id: 5, title: "Marjawa", img: "https://www.koimoi.com/wp-content/new-galleries/2019/11/box-office-marjaavaan-to-take-a-decent-opening-single-screens-are-the-key-on-the-first-day-001.jpg", trailer: "https://www.youtube.com/embed/L7TbPUOn1hc" },
-
-    { id: 6, title: "Ek Deewane Ki Deewaniyat", img: "https://c.saavncdn.com/532/Deewaniyat-From-Ek-Deewane-Ki-Deewaniyat-Original-Motion-Picture-Soundtrack-Hindi-2025-20250827010315-500x500.jpg", trailer: "https://www.youtube.com/embed/y9jtbWNAvXc" },
-
-    { id: 7, title: "Saiyara", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmkrtRPzlwbYqEmj3P3siCZeEPYNy25rIVkw&s", trailer: "https://www.youtube.com/embed/AjzwZ7trRGg" },
-
-    { id: 8, title: "Sikandar", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-YDVd4PxrdgK1r7Y_i2MT5U9ZCiOncSTyBA&s", trailer: "https://www.youtube.com/embed/4_FGQP9g02k" },
-
-    { id: 15, title: "Border 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZY0ipr9LcZzsM802YqCRL9Ie3vCj9e8Lrqw&s", trailer: "https://www.youtube.com/embed/BgfL0zJnPug" },
-
-    { id: 16, title: "12 Fail", img: "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/690de3e84d854e0e7600479d/images/LANDSCAPE_169/1640216-h-6b1d26b33811?o=production", trailer: "https://www.youtube.com/embed/avD8D0q7gIw" },
+    {
+      id: 5,
+      title: "Marjawa",
+      img: "https://www.koimoi.com/wp-content/new-galleries/2019/11/box-office-marjaavaan-to-take-a-decent-opening-single-screens-are-the-key-on-the-first-day-001.jpg",
+      trailer: "https://www.youtube.com/embed/L7TbPUOn1hc",
+    },
+    {
+      id: 6,
+      title: "Ek Deewane Ki Deewaniyat",
+      img: "https://c.saavncdn.com/532/Deewaniyat-From-Ek-Deewane-Ki-Deewaniyat-Original-Motion-Picture-Soundtrack-Hindi-2025-20250827010315-500x500.jpg",
+      trailer: "https://www.youtube.com/embed/y9jtbWNAvXc",
+    },
+    {
+      id: 7,
+      title: "Saiyara",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmkrtRPzlwbYqEmj3P3siCZeEPYNy25rIVkw&s",
+      trailer: "https://www.youtube.com/embed/gOOO7eZv0mI"
+    },
+    {
+      id: 8,
+      title: "Sikandar",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-YDVd4PxrdgK1r7Y_i2MT5U9ZCiOncSTyBA&s",
+      trailer: "https://www.youtube.com/embed/4_FGQP9g02k",
+    },
+    {
+      id: 15,
+      title: "Border 2",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZY0ipr9LcZzsM802YqCRL9Ie3vCj9e8Lrqw&s",
+      trailer: "https://www.youtube.com/embed/BgfL0zJnPug",
+    },
+    {
+      id: 16,
+      title: "12 Fail",
+      img: "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/690de3e84d854e0e7600479d/images/LANDSCAPE_169/1640216-h-6b1d26b33811?o=production",
+      trailer: "https://www.youtube.com/embed/avD8D0q7gIw",
+    },
   ],
   Chinese: [
-    { id: 9, title: "Crouching Tiger", img: "https://images.justwatch.com/backdrop/336164598/s640/crouching-tiger-hidden-dragon-sword-of-destiny", trailer: "https://www.youtube.com/embed/a3sQIjbrMQw" },
-
-    { id: 10, title: " Lord of the Monster", img: "https://m.media-amazon.com/images/I/91n7D2tvgML._AC_UF894,1000_QL80_.jpg", trailer: "https://www.youtube.com/embed/QNFQo2575pI" },
-
-    { id: 11, title: "Ip Man 2", img: "https://m.media-amazon.com/images/M/MV5BOGVjMDEzNjMtMWJmMy00NDdjLWFkMzItOTBhZTE3OWU0YmM4XkEyXkFqcGc@._V1_.jpg", trailer: "https://www.youtube.com/embed/LSXdo4TTJ9A" },
-
-    { id: 12, title: "The Wandering Earth", img: "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3353/1736871863353-i", trailer: "https://www.youtube.com/embed/0TDII5IkI3Y" },
-
-    { id: 17, title: "The Monkey King", img: "https://images.justwatch.com/poster/35414272/s718/the-monkey-king.jpg", trailer: "https://www.youtube.com/embed/8InLhRjFJVU" },
-
-    { id: 18, title: "Journey to the West", img: "https://m.media-amazon.com/images/M/MV5BYTM2ZDliMjEtZmUyYy00Zjk0LWJhZWQtYTYwMzBlZjA3ZTNlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/embed/FJmAlL3AYHI" },
+    {
+      id: 9,
+      title: "Crouching Tiger",
+      img: "https://images.justwatch.com/backdrop/336164598/s640/crouching-tiger-hidden-dragon-sword-of-destiny",
+      trailer: "https://www.youtube.com/embed/a3sQIjbrMQw",
+    },
+    {
+      id: 10,
+      title: "Lord of the Monster",
+      img: "https://m.media-amazon.com/images/I/91n7D2tvgML._AC_UF894,1000_QL80_.jpg",
+      trailer: "https://www.youtube.com/embed/QNFQo2575pI",
+    },
+    {
+      id: 11,
+      title: "Ip Man 2",
+      img: "https://m.media-amazon.com/images/M/MV5BOGVjMDEzNjMtMWJmMy00NDdjLWFkMzItOTBhZTE3OWU0YmM4XkEyXkFqcGc@._V1_.jpg",
+      trailer: "https://www.youtube.com/embed/LSXdo4TTJ9A",
+    },
+    {
+      id: 12,
+      title: "The Wandering Earth",
+      img: "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3353/1736871863353-i",
+      trailer: "https://www.youtube.com/embed/0TDII5IkI3Y",
+    },
+    {
+      id: 17,
+      title: "The Monkey King",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOzi-WR4azypn5jkmgMhSSS_QtIBKoYDzjg&s",
+      trailer: "https://www.youtube.com/embed/8InLhRjFJVU",
+    },
+    {
+      id: 18,
+      title: "Journey to the West",
+      img: "https://pic5.iqiyipic.com/image/20250325/21/0c/v_180118265_m_601_en_m1_1013_569.jpg",
+      trailer: "https://www.youtube.com/embed/FJmAlL3AYHI",
+    },
   ],
   Horror: [
-    { id: 25, title: "The Conjuring", img: "https://m.media-amazon.com/images/M/MV5BM2U2NGE1OWQtN2FjNi00YmQ2LTliMDAtNzMyYzQ5YTJiNDFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/embed/FSAz556s0fM" },
-
-    { id: 26, title: "Annabelle", img: "https://upload.wikimedia.org/wikipedia/en/9/90/Annabelle_film_poster.jpg", trailer: "https://www.youtube.com/embed/paFgQNPGlsg" },
-
-    { id: 27, title: "IT", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfapkG2cy_IORECaazv_H8ameBppdWB4c_oA&s", trailer: "https://www.youtube.com/embed/xKJmEC5ieOk" },
-
-    { id: 28, title: "1920", img: "https://m.media-amazon.com/images/I/816YpgC5GoL._AC_UF1000,1000_QL80_.jpg", trailer: "https://www.youtube.com/embed/GZrsEBQuhO0" },
-
-    { id: 29, title: "1920 Evils Returns", img: "https://m.media-amazon.com/images/M/MV5BZjRjNDJhMWEtNmJkMi00ZDViLWE1YmEtYzFhZWRjZTI4ZjQ2XkEyXkFqcGc@._V1_.jpg", trailer: "https://www.youtube.com/embed/dxK0Z_VaLtk" },
-
-    { id: 30, title: "Evil Dead Rise", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsn77DDb-bL2sJKUDWLluNyRnEH1KW92eEA&s", trailer: "https://www.youtube.com/embed/4weFxATBEiY" },
+    {
+      id: 25,
+      title: "The Conjuring",
+      img: "https://m.media-amazon.com/images/M/MV5BM2U2NGE1OWQtN2FjNi00YmQ2LTliMDAtNzMyYzQ5YTJiNDFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      trailer: "https://www.youtube.com/embed/FSAz556s0fM",
+    },
+    {
+      id: 26,
+      title: "Annabelle",
+      img: "https://upload.wikimedia.org/wikipedia/en/9/90/Annabelle_film_poster.jpg",
+      trailer: "https://www.youtube.com/embed/paFgQNPGlsg",
+    },
+    {
+      id: 27,
+      title: "IT",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfapkG2cy_IORECaazv_H8ameBppdWB4c_oA&s",
+      trailer: "https://www.youtube.com/embed/xKJmEC5ieOk",
+    },
+    {
+      id: 28,
+      title: "1920",
+      img: "https://m.media-amazon.com/images/I/816YpgC5GoL._AC_UF1000,1000_QL80_.jpg",
+      trailer: "https://www.youtube.com/embed/GZrsEBQuhO0",
+    },
+    {
+      id: 29,
+      title: "1920 Evils Returns",
+      img: "https://m.media-amazon.com/images/M/MV5BZjRjNDJhMWEtNmJkMi00ZDViLWE1YmEtYzFhZWRjZTI4ZjQ2XkEyXkFqcGc@._V1_.jpg",
+      trailer: "https://www.youtube.com/embed/dxK0Z_VaLtk",
+    },
+    {
+      id: 30,
+      title: "Evil Dead Rise",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsn77DDb-bL2sJKUDWLluNyRnEH1KW92eEA&s",
+      trailer: "https://www.youtube.com/embed/4weFxATBEiY",
+    },
   ],
 };
 
+const MovieCard = ({ movie, onPlayTrailer }) => (
+  <div
+    onClick={() => onPlayTrailer(movie.trailer)}
+    className="group relative overflow-hidden rounded-xl aspect-video
+               cursor-pointer flex-shrink-0
+               shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20
+               transition-all duration-300
+               w-[160px] sm:w-64"
+  >
+    <img
+      src={movie.img}
+      alt={movie.title}
+      className="w-full h-full object-cover
+                 transition-transform duration-500
+                 sm:group-hover:scale-110"
+    />
+
+    {/* Overlay (always visible on mobile, hover on desktop) */}
+    <div
+      className="absolute inset-0
+                 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                 opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+                 transition-opacity duration-300
+                 flex items-end p-3"
+    >
+      <div className="flex items-center gap-2">
+        <div className="bg-cyan-500 p-2 rounded-full">
+          <Play size={16} className="text-white fill-white" />
+        </div>
+        <span className="text-white font-semibold text-xs sm:text-sm truncate">
+          {movie.title}
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
 
 export default function Dashboard() {
-  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [playingTrailer, setPlayingTrailer] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [profileDropdown, setProfileDropdown] = useState(false);
   const scrollRefs = useRef({});
 
-
-
-const [showBottomNav, setShowBottomNav] = useState(true);
-const lastScrollY = useRef(0);
-
-useEffect(() => {
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY.current) {
-      setShowBottomNav(false); // scroll down → hide
-    } else {
-      setShowBottomNav(true); // scroll up → show
-    }
-    lastScrollY.current = window.scrollY;
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
-
-
-
-  // Filter categories based on search
   const filteredCategories = useMemo(() => {
     if (!search.trim()) return categories;
     const filtered = {};
     const lower = search.toLowerCase();
     Object.entries(categories).forEach(([cat, items]) => {
-      const matched = items.filter(item => item.title.toLowerCase().includes(lower));
+      const matched = items.filter((item) =>
+        item.title.toLowerCase().includes(lower)
+      );
       if (matched.length) filtered[cat] = matched;
     });
     return filtered;
   }, [search]);
 
-  // Auto slide for hero
+  // Auto-rotate hero slider
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % movies.length);
+      setCurrentSlide((prev) => (prev + 1) % movies.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  // Hide/show header on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setShowHeader(false);
+      } else {
+        setShowHeader(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   const scrollCategory = (category, dir) => {
     const ref = scrollRefs.current[category];
@@ -163,257 +293,258 @@ useEffect(() => {
     }
   };
 
-  const MovieCard = ({ movie }) => (
-    <div
-      onClick={() => movie.trailer && setPlayingTrailer(movie.trailer)}
-      className="group relative overflow-hidden rounded-lg aspect-video cursor-pointer flex-shrink-0"
-    >
-      <img
-        src={movie.img || movie.image}
-        alt={movie.title}
-        className="w-full h-full object-contain sm:object-cover object-center group-hover:scale-105 transition duration-300"
-      />
-      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-        <button className="bg-red-600 hover:bg-red-700 p-3 rounded-full transition">
-          <Play size={24} fill="white" />
-        </button>
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2">
-        <p className="text-xs sm:text-sm font-semibold line-clamp-2">{movie.title}</p>
-      </div>
-    </div>
-  );
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
+  
 
   return (
-    <div className="bg-black text-white min-h-screen">
-
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-black text-white overflow-x-hidden">
       {/* NAVBAR */}
-  
-<nav className="sticky top-0 z-50 bg-black/90 backdrop-blur border-b border-gray-800">
-  <div className="px-4 sm:px-6 py-3 flex items-center justify-between">
-
-    {/* LEFT */}
-    <div className="flex items-center gap-6">
-      <Link to="/">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-          alt="Netflix"
-          className="h-7 sm:h-10 cursor-pointer"
-        />
-      </Link>
-
-      {/* Desktop Nav (optional later) */}
-      <div className="hidden md:flex gap-4 text-sm text-gray-300">
-        <span className="hover:text-white cursor-pointer">Home</span>
-        <span className="hover:text-white cursor-pointer">TV Shows</span>
-        <span className="hover:text-white cursor-pointer">Movies</span>
-      </div>
-    </div>
-
-    {/* RIGHT – Desktop */}
-    <div className="hidden sm:flex items-center gap-5">
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search"
-          className="bg-gray-800 text-white px-3 py-1.5 rounded-md text-sm w-48
-                     focus:outline-none focus:ring-2 focus:ring-red-600"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-      </div>
-
-      <Bell className="cursor-pointer hover:text-red-600" size={20} />
-
-      {/* Profile */}
-      <div className="relative group">
-        <User className="cursor-pointer hover:text-red-600" size={22} />
-
-        {/* Dropdown */}
-        <div className="absolute right-0 mt-3 w-40 bg-black border border-gray-800
-                        rounded shadow-lg opacity-0 group-hover:opacity-100
-                        invisible group-hover:visible transition">
-          <button className="w-full px-4 py-2 text-sm text-left hover:bg-gray-800">
-            Profile
-          </button>
-          <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}
-            className="w-full px-4 py-2 text-sm text-left text-red-500 hover:bg-gray-800"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Mobile Buttons */}
-    <div className="sm:hidden flex items-center gap-4">
-      <button onClick={() => setShowSearch(!showSearch)}>
-        <Search size={20} />
-      </button>
-      <button onClick={() => setMenuOpen(!menuOpen)}>
-        {menuOpen ? <X size={22} /> : <Menu size={22} />}
-      </button>
-    </div>
+ <nav
+  className={`fixed top-0 left-0 w-full z-50
+    px-4 sm:px-8 py-4
+    flex justify-between items-center
+    transition-all duration-500 ease-in-out
+    ${showHeader ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
+    ${scrollY > 50
+      ? "bg-slate-900/80 backdrop-blur-xl"
+      : "bg-transparent"}
+  `}
+>
+  {/* Logo */}
+  <div className="flex items-center select-none">
+    <span
+      className="text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.06em]"
+      style={{
+        fontFamily: "'Bebas Neue', 'Oswald', sans-serif",
+        transform: "skewX(-8deg)",
+        display: "inline-block",
+      }}
+    >
+      <Link to="/">CINEMAFLOW</Link>
+    </span>
   </div>
 
-  {/* Mobile Search */}
-  {showSearch && (
-    <div className="sm:hidden px-4 pb-3 border-t border-gray-800">
+  {/* Desktop Links */}
+  <div className="hidden md:flex gap-8">
+    <button className="hover:text-cyan-400 transition font-medium">
+      Home
+    </button>
+    <button className="hover:text-cyan-400 transition font-medium">
+      TV Shows
+    </button>
+    <button className="hover:text-cyan-400 transition font-medium">
+      Movies
+    </button>
+  </div>
+
+  {/* Right Section */}
+  <div className="flex items-center gap-3 sm:gap-6">
+    {/* Desktop Search */}
+    <div className="hidden sm:flex items-center bg-slate-800/60 hover:bg-slate-800 rounded-full px-4 py-2 transition w-44 md:w-64">
+      <Search size={18} className="text-gray-400" />
       <input
         type="text"
-        placeholder="Search"
-        className="w-full bg-gray-800 text-white px-3 py-2 rounded-md text-sm
-                   focus:outline-none focus:ring-2 focus:ring-red-600"
+        placeholder="Search movies..."
         value={search}
-        onChange={e => setSearch(e.target.value)}
-        autoFocus
+        onChange={(e) => setSearch(e.target.value)}
+        className="bg-transparent ml-2 outline-none text-sm w-full placeholder-gray-500 text-white"
       />
     </div>
-  )}
 
-  {/* Mobile Menu */}
- {menuOpen && (
-  <div className="sm:hidden px-4 py-4 border-t border-gray-800 space-y-4 text-sm">
-
-    {/* Mobile Nav Links */}
-    <div className="flex flex-col gap-3 text-gray-300">
-      <span
-        onClick={() => {
-          navigate("/");
-          setMenuOpen(false);
-        }}
-        className="hover:text-white cursor-pointer"
-      >
-        Home
-      </span>
-
-      <span
-        onClick={() => {
-          navigate("/tv-shows");
-          setMenuOpen(false);
-        }}
-        className="hover:text-white cursor-pointer"
-      >
-        TV Shows
-      </span>
-
-      <span
-        onClick={() => {
-          navigate("/movies");
-          setMenuOpen(false);
-        }}
-        className="hover:text-white cursor-pointer"
-      >
-        Movies
-      </span>
-    </div>
-
-    <hr className="border-gray-800" />
-
-    {/* Other Actions */}
-    <button className="flex items-center gap-2 hover:text-red-600">
-      <Bell size={18} /> Notifications
+    {/* Notification */}
+    <button className="hidden sm:block text-gray-400 hover:text-cyan-400 transition">
+      <Bell size={20} />
     </button>
 
-    <button className="flex items-center gap-2 hover:text-red-600">
-      <User size={18} /> Profile
+    {/* Profile Dropdown */}
+    <div className="relative hidden sm:block">
+      <button
+        onClick={() => setProfileDropdown(!profileDropdown)}
+        className="text-gray-400 hover:text-cyan-400 transition rounded-full p-1 hover:bg-slate-700/40"
+      >
+        <User size={20} />
+      </button>
+
+      {profileDropdown && (
+        <div className="absolute right-0 mt-3 w-48 bg-slate-800/95 backdrop-blur-xl rounded-lg shadow-xl border border-slate-700/50 overflow-hidden">
+          <button className="w-full px-4 py-3 text-sm text-left hover:bg-slate-700/50 transition border-b border-slate-700/50">
+            Profile
+          </button>
+          <button className="w-full px-4 py-3 text-sm text-left hover:bg-slate-700/50 transition border-b border-slate-700/50">
+            Settings
+          </button>
+          <button
+            onClick={handleLogout}
+            className="w-full px-4 py-3 text-sm text-left text-red-400 hover:bg-red-500/20 transition flex items-center gap-2"
+          >
+            <LogOut size={16} /> Logout
+          </button>
+        </div>
+      )}
+    </div>
+
+    {/* Mobile Icons */}
+    <button
+      onClick={() => setShowSearch(!showSearch)}
+      className="sm:hidden text-gray-400 hover:text-cyan-400 transition p-2 rounded-full hover:bg-slate-700/30"
+    >
+      <Search size={20} />
     </button>
 
     <button
-      onClick={() => {
-        localStorage.removeItem("token");
-        navigate("/login");
-      }}
-      className="w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold"
+      onClick={() => setMenuOpen(!menuOpen)}
+      className="sm:hidden text-gray-400 hover:text-cyan-400 transition p-2 rounded-full hover:bg-slate-700/30"
     >
-      Logout
+      {menuOpen ? <X size={20} /> : <Menu size={20} />}
     </button>
   </div>
-)}
-
 </nav>
 
-      {/* HERO SLIDER */}
- <div className="relative w-full h-screen overflow-hidden bg-black">
-  {movies.map((movie, i) => (
-    <div
-      key={movie.id}
-      className={`absolute inset-0 transition-opacity duration-1000 ${
-        i === currentSlide ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      {/* Single HD Image with slight blur and dimming */}
-      <img
-        src={movie.image}
-        alt={movie.title}
-        className="absolute inset-0 w-full h-full object-cover brightness-80 "
-      />
 
-      {/* Title / Description */}
-      <div className="absolute bottom-16 left-8 z-10 text-white max-w-xl">
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
-          {movie.title}
-        </h1>
-        <p className="mt-2 text-sm sm:text-lg lg:text-xl">
-          {movie.description}
-        </p>
+      {/* Mobile Search Bar */}
+      {showSearch && (
+        <div className="fixed top-16 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-lg px-4 py-3 sm:hidden">
+          <div className="flex items-center bg-slate-800 rounded-full px-4 py-2">
+            <Search size={18} className="text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search movies..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              autoFocus
+              className="bg-transparent ml-2 outline-none text-sm w-full placeholder-gray-500"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="fixed top-16 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-lg sm:hidden">
+          <div className="flex flex-col gap-4 p-4">
+            <button className="text-left hover:text-cyan-400 transition font-medium py-2">
+              Home
+            </button>
+            <button className="text-left hover:text-cyan-400 transition font-medium py-2">
+              TV Shows
+            </button>
+            <button className="text-left hover:text-cyan-400 transition font-medium py-2">
+              Movies
+            </button>
+            <hr className="border-slate-700/50" />
+            <button className="text-left hover:text-cyan-400 transition py-2">
+              Notifications
+            </button>
+            <button className="text-left hover:text-cyan-400 transition py-2">
+              Profile
+            </button>
+            <button
+              onClick={handleLogout}
+              className="w-full bg-gradient-to-r from-red-600/80 to-red-700/80 hover:from-red-600 hover:to-red-700 text-white py-2 rounded-lg font-semibold transition mt-2"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Add padding for header */}
+      <div className="pt-14 sm:pt-16">
+        {/* HERO SLIDER */}
+        <div className="relative w-full h-96 sm:h-[500px] overflow-hidden rounded-b-2xl">
+          {movies.map((movie, i) => (
+            <div
+              key={movie.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                i === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <img
+                src={movie.image}
+                alt={movie.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/30 to-transparent" />
+              <div className="absolute bottom-10 left-6 sm:left-10">
+                <h1 className="text-3xl sm:text-5xl font-bold mb-3">
+                  {movie.title}
+                </h1>
+                <p className="text-gray-300 mb-6 text-sm sm:text-base">
+                  {movie.description}
+                </p>
+                <button className="bg-cyan-600 hover:bg-cyan-500 px-8 py-3 rounded-full font-semibold flex items-center gap-2 transition">
+                  <Play size={20} className="fill-white" /> Play Now
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Navigation Dots */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {movies.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentSlide(i)}
+                className={`transition-all duration-300 ${
+                  i === currentSlide
+                    ? "bg-cyan-400 w-8 h-3 rounded-full"
+                    : "bg-white/50 hover:bg-white/70 w-3 h-3 rounded-full"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-  ))}
 
-  {/* Navigation Dots */}
-  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-    {movies.map((_, i) => (
-      <button
-        key={i}
-        onClick={() => setCurrentSlide(i)}
-        className={`w-3 h-3 rounded-full transition ${
-          i === currentSlide ? "bg-red-600" : "bg-white/50"
-        }`}
-      />
-    ))}
-  </div>
-</div>
-
-
-
-
-      {/* CATEGORIES */}
-      <div className="px-4 sm:px-8 py-6 space-y-6 pb-20">
+      {/* CATEGORIES SECTION */}
+      <div className="px-4 sm:px-8 py-12">
         {Object.keys(filteredCategories).length === 0 ? (
-          <div className="text-center py-20 text-gray-400">No results for "{search}"</div>
+          <div className="text-center py-20">
+            <p className="text-xl text-gray-400">
+              No results for "<span className="text-cyan-400">{search}</span>"
+            </p>
+          </div>
         ) : (
           Object.entries(filteredCategories).map(([category, items]) => (
-            <div key={category}>
-              <h2 className="text-xl sm:text-2xl font-bold mb-3 text-red-500">{category}</h2>
-              <div className="relative group">
+            <div key={category} className="mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 flex items-center gap-2">
+                <div className="w-1 h-8 bg-gradient-to-b from-cyan-500 to-blue-600 rounded" />
+                {category}
+              </h2>
+
+              <div className="group relative">
+                {/* Left Arrow */}
                 <button
                   onClick={() => scrollCategory(category, "left")}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/70 hover:bg-black/90 p-2 rounded-full opacity-0 group-hover:opacity-100"
+                  className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 p-2 sm:p-3 rounded-full opacity-0 sm:group-hover:opacity-100 hover:opacity-100 transition shadow-lg"
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={20} />
                 </button>
 
+                {/* Scroll Container */}
                 <div
-                  ref={el => scrollRefs.current[category] = el}
-                  className="flex gap-2 sm:gap-4 overflow-x-auto scroll-smooth hide-scrollbar"
+                  ref={(el) => (scrollRefs.current[category] = el)}
+                  className="flex gap-2 sm:gap-4 overflow-x-auto scroll-smooth hide-scrollbar pb-2"
                 >
-                  {items.map(movie => (
-                    <div key={movie.id} className="w-36 sm:w-48 flex-shrink-0">
-                      <MovieCard movie={movie} />
-                    </div>
+                  {items.map((movie) => (
+                    <MovieCard
+                      key={movie.id}
+                      movie={movie}
+                      onPlayTrailer={setPlayingTrailer}
+                    />
                   ))}
                 </div>
 
+                {/* Right Arrow */}
                 <button
                   onClick={() => scrollCategory(category, "right")}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/70 hover:bg-black/90 p-2 rounded-full opacity-0 group-hover:opacity-100"
+                  className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 p-2 sm:p-3 rounded-full opacity-0 sm:group-hover:opacity-100 hover:opacity-100 transition shadow-lg"
                 >
-                  <ChevronRight size={24} />
+                  <ChevronRight size={20} />
                 </button>
               </div>
             </div>
@@ -421,135 +552,110 @@ useEffect(() => {
         )}
       </div>
 
+      
+
       {/* TRAILER MODAL */}
       {playingTrailer && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center px-4">
-          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="relative w-full max-w-4xl">
             <button
               onClick={() => setPlayingTrailer(null)}
-              className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full z-10"
+              className="absolute top-4 right-4 bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-full z-10 transition shadow-lg"
             >
               <X size={24} />
             </button>
-            <iframe src={playingTrailer} className="w-full h-full" allowFullScreen title="Trailer" />
+            <div className="aspect-video rounded-lg overflow-hidden shadow-2xl">
+              <iframe
+                src={playingTrailer}
+                title="Movie Trailer"
+                className="w-full h-full"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       )}
 
-      {/* FIXED NAVBAR (Top / Bottom Auto) */}
-{/* FIXED BOTTOM NAVBAR */}
-<div
-  className={`fixed bottom-0 left-0 right-0 z-50
-  transition-transform duration-300
-  ${showBottomNav ? "translate-y-0" : "translate-y-full"}
-  bg-black/90 border-t border-gray-800`}
+      {/* FIXED BOTTOM NAVBAR */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-slate-950/95 to-slate-950/80 backdrop-blur-lg border-t border-slate-700/50">
+
+        <div className="flex justify-around items-center py-3 px-2">
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+            <Home size={22} />
+            <span className="text-xs font-semibold">Home</span>
+          </button>
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+            <Tv size={22} />
+            <span className="text-xs font-semibold">Series</span>
+          </button>
+
+          {/* CENTER LOGO BUTTON */}
+    <button
+  className="w-16 h-16 -mt-10 rounded-full
+             bg-cyan-500 hover:bg-cyan-400
+             flex items-center justify-center
+             shadow-2xl shadow-cyan-500/50
+             transition transform hover:scale-110 active:scale-95"
 >
-  <div className="flex justify-around items-center py-2">
-
-    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
-      <Home size={22} />
-      <span className="text-xs">Home</span>
-    </button>
-
-    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
-      <Tv size={22} />
-      <span className="text-xs">Series</span>
-    </button>
-
-   {/* NETFLIX CENTER – SVG LOGO */}
-<button
-  onClick={() => navigate("/")}
-  className="bg-black w-14 h-14 flex items-center justify-center rounded-full -mt-8
-  shadow-[0_8px_30px_rgba(220,38,38,0.6)]
-  active:scale-95 transition-transform duration-150"
->
-  <svg
-    viewBox="0 0 300 300"
-    width="28"
-    height="28"
-    xmlns="http://www.w3.org/2000/svg"
-    className="translate-y-[2px]"
-  >
-    {/* Left bar */}
-    <rect x="40" y="20" width="45" height="260" fill="#E50914" />
-
-    {/* Diagonal middle */}
-    <polygon
-      points="85,20 135,20 215,280 165,280"
-      fill="#B20710"
-    />
-
-    {/* Right bar */}
-    <rect x="215" y="20" width="45" height="260" fill="#E50914" />
-  </svg>
+  <Play size={26} className="text-white ml-1" />
 </button>
 
 
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+            <Film size={22} />
+            <span className="text-xs font-semibold">Movies</span>
+          </button>
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+            <Settings size={22} />
+            <span className="text-xs font-semibold">Settings</span>
+          </button>
+        </div>
+      </div>
 
+      {/* Add padding for bottom nav */}
+      <div  />
 
-    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
-      <Film size={22} />
-      <span className="text-xs">Movies</span>
-    </button>
+      {/* FOOTER */}
+<footer className="bg-slate-950/50 border-t border-slate-700/50 text-gray-400 text-sm mt-8">
 
-    <button className="flex flex-col items-center text-gray-400 hover:text-red-600">
-      <Settings size={22} />
-      <span className="text-xs">Settings</span>
-    </button>
-
-  </div>
-</div>
-
-
-<footer className="bg-black text-gray-400 text-sm mt-10">
-  <div className="max-w-6xl mx-auto px-6 py-10">
-
-    {/* Top Text */}
-    <p className="mb-6">
-      Questions? Call{" "}
-      <span className="hover:underline cursor-pointer">
-        70-11-22-7136
-      </span>
-    </p>
-
-    {/* Links */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      {[
-        "FAQ",
-        "Help Centre",
-        "Account",
-        "Media Centre",
-        "Investor Relations",
-        "Jobs",
-        "Ways to Watch",
-        "Terms of Use",
-        "Privacy",
-        "Cookie Preferences",
-        "Corporate Information",
-        "Contact Us",
-        "Speed Test",
-        "Legal Notices",
-        "Only on Netflix",
-      ].map((item) => (
-        <span
-          key={item}
-          className="hover:underline cursor-pointer"
-        >
-          {item}
-        </span>
-      ))}
-    </div>
-
-    
-
-    {/* Country */}
-    <p className="mt-6 text-xs text-gray-500">
-      Netflix India
-    </p>
-  </div>
-</footer>
-
-
+        <div className="max-w-6xl mx-auto px-6 py-6">
+          <p className="mb-6">
+            Questions? Call{" "}
+            <span className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition">
+              70-11-22-7136
+            </span>
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {[
+              "FAQ",
+              "Help Centre",
+              "Account",
+              "Media Centre",
+              "Investor Relations",
+              "Jobs",
+              "Ways to Watch",
+              "Terms of Use",
+              "Privacy",
+              "Cookie Preferences",
+              "Corporate Information",
+              "Contact Us",
+              "Speed Test",
+              "Legal Notices",
+              "Only on CinemaFlow",
+            ].map((item) => (
+              <span
+                key={item}
+                className="hover:text-cyan-400 cursor-pointer transition"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-gray-600">
+            © 2024 CinemaFlow. All rights reserved.
+          </p>
+        </div>
+      </footer>
 
       <style>{`
         .hide-scrollbar {

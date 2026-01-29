@@ -8,6 +8,7 @@ import Dashboard from "./Components/Dashboard";
 
 
 
+
 function App() {
   
 
@@ -19,6 +20,7 @@ function App() {
        <Route path="/login" element={<Login/>}></Route>
        <Route path="/reset-password/:token" element={<ResetPassword/>}></Route>
        <Route path="/dashboard" element={<Dashboard/>}></Route>
+       
 
 
       </Routes>

@@ -1,15 +1,12 @@
-import { ChevronLeft, ChevronRight, Search, Bell, Play, Info, Volume2, VolumeX } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, Bell, Play, Info, Zap, Heart, Users, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-
-
 
 const movies = [
   {
     id: 1,
     title: { en: "Oppenheimer", hi: "ओपेनहाइमर" },
-    year: "2023",
+    year: "",
     rating: "R",
     type: { en: "Movie", hi: "फ़िल्म" },
     genres: { en: "Biography • Drama", hi: "जीवनी • ड्रामा" },
@@ -23,7 +20,7 @@ const movies = [
   {
     id: 2,
     title: { en: "Dune: Part Two", hi: "ड्यून पार्ट टू" },
-    year: "2024",
+    year: "",
     rating: "PG-13",
     type: { en: "Movie", hi: "फ़िल्म" },
     genres: { en: "Sci-Fi • Adventure", hi: "साई-फाई • एडवेंचर" },
@@ -37,7 +34,7 @@ const movies = [
   {
     id: 3,
     title: { en: "John Wick: Chapter 4", hi: "जॉन विक चैप्टर 4" },
-    year: "2023",
+    year: "",
     rating: "R",
     type: { en: "Movie", hi: "फ़िल्म" },
     genres: { en: "Action • Thriller", hi: "एक्शन • थ्रिलर" },
@@ -51,7 +48,7 @@ const movies = [
   {
     id: 4,
     title: { en: "Avatar: The Way of Water", hi: "अवतार: द वे ऑफ वॉटर" },
-    year: "2022",
+    year: "",
     rating: "PG-13",
     type: { en: "Movie", hi: "फ़िल्म" },
     genres: { en: "Fantasy • Sci-Fi", hi: "फैंटेसी • साई-फाई" },
@@ -62,13 +59,10 @@ const movies = [
     img: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
     trailer: "https://www.youtube.com/embed/d9MyW72ELq0"
   },
-
-
-  
   {
     id: 7,
     title: { en: "Pathaan", hi: "पठान" },
-    year: "2023",
+    year: "",
     rating: "U/A 16+",
     type: { en: "Movie", hi: "फ़िल्म" },
     genres: { en: "Action • Spy", hi: "एक्शन • जासूसी" },
@@ -82,7 +76,7 @@ const movies = [
   {
     id: 8,
     title: { en: "The Batman", hi: "द बैटमैन" },
-    year: "2022",
+    year: "",
     rating: "PG-13",
     type: { en: "Movie", hi: "फ़िल्म" },
     genres: { en: "Action • Crime", hi: "एक्शन • क्राइम" },
@@ -93,11 +87,10 @@ const movies = [
     img: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
     trailer: "https://www.youtube.com/embed/mqqft2x_Aa4"
   },
-
   {
     id: 10,
     title: { en: "Mission: Impossible – Dead Reckoning", hi: "मिशन इम्पॉसिबल" },
-    year: "2023",
+    year: "",
     rating: "PG-13",
     type: { en: "Movie", hi: "फ़िल्म" },
     genres: { en: "Action • Adventure", hi: "एक्शन • एडवेंचर" },
@@ -110,31 +103,51 @@ const movies = [
   }
 ];
 
+const features = [
+  {
+    icon: Zap,
+    title: { en: "Ultra HD Streaming", hi: "अल्ट्रा एचडी स्ट्रीमिंग" },
+    desc: { en: "Experience cinema-quality 4K streaming with zero buffering", hi: "बिना किसी रुकावट के सिनेमा-गुणवत्ता का 4K अनुभव लें" }
+  },
+  {
+    icon: Heart,
+    title: { en: "Personalized Picks", hi: "व्यक्तिगत सिफारिशें" },
+    desc: { en: "AI-powered recommendations tailored to your taste", hi: "आपकी पसंद के अनुसार एआई-संचालित सुझाव" }
+  },
+  {
+    icon: Users,
+    title: { en: "Family Profiles", hi: "परिवार प्रोफाइल" },
+    desc: { en: "Create unlimited profiles for your entire family", hi: "अपने पूरे परिवार के लिए असीमित प्रोफाइल बनाएं" }
+  },
+  {
+    icon: Sparkles,
+    title: { en: "Exclusive Content", hi: "एक्सक्लूसिव सामग्री" },
+    desc: { en: "Access originals you won't find anywhere else", hi: "एक्सक्लूसिव सामग्री जो कहीं और नहीं मिलेगी" }
+  }
+];
+
+
 
 const faqs = [
   {
-    question: { en: "What is Netflix?", hi: "Netflix क्या है?" },
-    answer: { en: "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.", hi: "Netflix एक स्ट्रीमिंग सेवा है जो हजारों इंटरनेट-कनेक्टेड डिवाइस पर विभिन्न प्रकार के टीवी शो, फिल्में, एनिमे, वृत्तचित्र और बहुत कुछ प्रदान करती है।" }
+    question: { en: "What is CinemaFlow?", hi: "CinemaFlow क्या है?" },
+    answer: { en: "CinemaFlow is a premium streaming platform offering thousands of movies, series, and exclusive content from around the world.", hi: "CinemaFlow एक प्रीमियम स्ट्रीमिंग प्लेटफॉर्म है जो दुनिया भर से हजारों फिल्में और सिरीज देता है।" }
   },
   {
-    question: { en: "How much does Netflix cost?", hi: "Netflix की कीमत कितनी है?" },
-    answer: { en: "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly price. Plans start at ₹149 per month.", hi: "आपके स्मार्टफोन, टैबलेट, स्मार्ट टीवी, लैपटॉप या स्ट्रीमिंग डिवाइस पर Netflix देखें, सभी एक निश्चित मासिक मूल्य पर। योजनाएं ₹149 प्रति माह से शुरू होती हैं।" }
+    question: { en: "How much does it cost?", hi: "इसकी कीमत कितनी है?" },
+    answer: { en: "Plans start at ₹199/month with flexible options. Cancel anytime, no hidden fees.", hi: "योजनाएं ₹199/माह से शुरू होती हैं। कभी भी रद्द करें, कोई छिपी फीस नहीं।" }
   },
   {
-    question: { en: "Where can I watch?", hi: "मैं कहां देख सकता हूं?" },
-    answer: { en: "Watch anywhere, anytime. Sign in with your Netflix account to watch on any internet-connected device. You can stream on your TV, computer, phone, tablet, and more.", hi: "कहीं भी, कभी भी देखें। किसी भी इंटरनेट-कनेक्टेड डिवाइस पर देखने के लिए अपने Netflix खाते से साइन इन करें।" }
+    question: { en: "Can I download content?", hi: "क्या मैं सामग्री डाउनलोड कर सकता हूं?" },
+    answer: { en: "Yes! Download unlimited movies and shows to watch offline on any device.", hi: "हाँ! असीमित फिल्में डाउनलोड करें और ऑफलाइन देखें।" }
   },
   {
-    question: { en: "How do I cancel?", hi: "मैं कैसे रद्द करूं?" },
-    answer: { en: "Netflix is flexible. There are no annoying contracts and no commitments. You can easily cancel your account online in two clicks.", hi: "Netflix लचकदार है। कोई परेशानी वाले अनुबंध नहीं हैं। आप आसानी से अपने खाते को ऑनलाइन रद्द कर सकते हैं।" }
+    question: { en: "Is there a free trial?", hi: "क्या कोई मुफ्त परीक्षण है?" },
+    answer: { en: "Yes, enjoy 7 days of free access to explore our entire library.", hi: "हाँ, 7 दिन की मुफ्त एक्सेस का आनंद लें।" }
   },
   {
-    question: { en: "What can I watch on Netflix?", hi: "मैं Netflix पर क्या देख सकता हूं?" },
-    answer: { en: "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning originals, and more. Watch all you want, anytime you want.", hi: "Netflix में विशेषताएं, वृत्तचित्र, टीवी शो, एनिमे, पुरस्कार विजेता मूल और बहुत कुछ शामिल हैं।" }
-  },
-  {
-    question: { en: "Is Netflix good for kids?", hi: "क्या Netflix बच्चों के लिए अच्छा है?" },
-    answer: { en: "The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and films.", hi: "Netflix बच्चों के अनुभव में माता-पिता को नियंत्रण देने के लिए परिवार के अनुकूल शो और फिल्मों को शामिल किया गया है।" }
+    question: { en: "How many screens can I watch on?", hi: "मैं कितने स्क्रीन पर देख सकता हूं?" },
+    answer: { en: "Premium plans allow simultaneous streaming on up to 4 devices.", hi: "प्रीमियम योजनाओं में 4 डिवाइस पर एक साथ देखें।" }
   }
 ];
 
@@ -144,201 +157,245 @@ export default function Home() {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(4);
   const [openIndex, setOpenIndex] = useState(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const [email, setEmail] = useState("");
   const [scrollY, setScrollY] = useState(0);
-
- const [email, setEmail] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(4);
+      }
+      setStartIndex(0);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
+const [showHeader, setShowHeader] = useState(true);
+const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 80) {
+      // scrolling down → hide
+      setShowHeader(false);
+    } else {
+      // scrolling up → show
+      setShowHeader(true);
+    }
+
+    setLastScrollY(currentScrollY);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [lastScrollY]);
+
+  const visibleMovies = movies.slice(startIndex, startIndex + itemsPerView);
+
+  const next = () => {
+    if (startIndex + itemsPerView < movies.length) {
+      setStartIndex(startIndex + itemsPerView);
+    }
+  };
+
+  const prev = () => {
+    if (startIndex - itemsPerView >= 0) {
+      setStartIndex(startIndex - itemsPerView);
+    }
+  };
 
   const handleStart = () => {
     if (!email) return alert("Email required");
-
-    // 🔐 Save email entered on home page
     localStorage.setItem("preLoginEmail", email);
-
     navigate("/login");
   };
 
-
- useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth < 640) {
-      setItemsPerView(2); // Mobile
-    } else {
-      setItemsPerView(4); // Laptop & Desktop
-    }
-    setStartIndex(0); // reset on resize
-  };
-
-  handleResize();
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
-
-
-const visibleMovies = movies.slice(
-  startIndex,
-  startIndex + itemsPerView
-);
-
-
-  const next = () => {
-  if (startIndex + itemsPerView < movies.length) {
-    setStartIndex(startIndex + itemsPerView);
-  }
-};
-
-const prev = () => {
-  if (startIndex - itemsPerView >= 0) {
-    setStartIndex(startIndex - itemsPerView);
-  }
-};
-
-
   return (
-    <div className="bg-black text-white min-h-screen overflow-x-hidden">
+    <div className="bg-slate-950 text-white min-h-screen overflow-x-hidden font-sans" style={{ fontFamily: "'Poppins', 'Segoe UI', sans-serif" }}>
       {/* HEADER */}
-     <header
-  className={`fixed top-0 w-full z-40 px-4 sm:px-6 py-4 flex justify-between items-center transition-all ${
-    scrollY > 10
-      ? "bg-black/90 backdrop-blur"
-      : "bg-gradient-to-b from-black/70 to-transparent"
+<header
+ 
+  className={`fixed top-0 left-0 w-full z-50
+  px-4 sm:px-8 py-4
+  flex justify-between items-center
+  transition-all duration-500 ease-in-out
+  ${
+    showHeader
+      ? "translate-y-0 opacity-100"
+      : "-translate-y-full opacity-0"
+  }
+  ${
+    scrollY > 50
+      ? "bg-slate-900/80 backdrop-blur-xl"
+      : "bg-transparent"
   }`}
 >
- {/* LOGO */}
-<img
-  src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-  alt="Netflix"
-  className="h-6 sm:h-12 w-auto"
-/>
 
+
+  {/* LOGO */}
+  <div className="flex items-center select-none">
+    <span
+      className="text-2xl sm:text-3xl font-extrabold text-white
+      tracking-[-0.06em]"
+      style={{
+        fontFamily: "'Bebas Neue', 'Oswald', sans-serif",
+        transform: "skewX(-8deg)",
+        display: "inline-block",
+      }}
+    >
+      CINEMAFLOW
+    </span>
+  </div>
 
   {/* RIGHT CONTROLS */}
-  <div className="flex items-center gap-3 sm:gap-5">
+  <div className="flex items-center gap-3 sm:gap-6">
+    <select
+      value={language}
+      onChange={(e) => setLanguage(e.target.value)}
+      className="bg-slate-800/60 text-white
+      border border-slate-600
+      px-3 sm:px-4 py-2
+      text-xs sm:text-sm
+      rounded-lg
+      outline-none
+      focus:border-cyan-400
+      transition"
+    >
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+    </select>
 
-  
-   
-
- {/* LANGUAGE SELECT */}
-   <select
-  value={language}
-  onChange={(e) => setLanguage(e.target.value)}
-  className="bg-black text-white border border-gray-600
-             px-4 py-2 text-sm sm:text-base
-             rounded-md min-w-[110px]
-             focus:outline-none hover:border-gray-400 transition"
->
-  <option value="en" className="bg-black text-white">
-    English
-  </option>
-  <option value="hi" className="bg-black text-white">
-    हिंदी
-  </option>
-</select>
-
-
-    {/* SIGN IN / SIGN UP */}
     <a
       href="/login"
-      className="bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-semibold
-                 px-4 py-1.5 rounded transition"
+      className="bg-cyan-500/90 hover:bg-cyan-400
+      text-white text-xs sm:text-sm font-bold
+      px-4 sm:px-6 py-2
+      rounded-lg
+      transition-transform duration-300
+      hover:scale-105
+      shadow-md shadow-cyan-500/30"
     >
       {language === "en" ? "Sign In" : "साइन इन"}
     </a>
-
   </div>
 </header>
 
 
-      {/* HERO */}
-      <section className="relative w-full h-screen flex items-center justify-start px-4 sm:px-6 lg:px-10 pt-16 sm:pt-20">
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-300"
-          style={{
-            backgroundImage: "url('bg-netflix.jpg')",
-            transform: `scale(${1 + scrollY * 0.0005})`
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
-        
-       <div className="relative z-10 max-w-2xl text-left sm:text-left">
-  {/* Heading */}
-  <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4 leading-tight">
-    {language === "en"
-      ? "Unlimited movies, shows, and more"
-      : "अनलिमिटेड फ़िल्में, शो और बहुत कुछ"}
-  </h2>
 
-  {/* Sub text */}
-  <p className="text-sm sm:text-lg mb-2 text-gray-200">
-    {language === "en"
-      ? "Starts at ₹149. Cancel at any time."
-      : "₹149 से शुरू. कभी भी कैंसल करें."}
-  </p>
+      {/* HERO SECTION */}
+     <section className="relative w-full h-screen flex items-center justify-start px-4 sm:px-8 pt-20 overflow-hidden">
+  {/* BACKGROUND IMAGE */}
+  <div
+    className="absolute inset-0 bg-cover bg-center scale-105"
+    style={{
+      backgroundImage:
+        "url('bg-netflix.jpg')",
+    }}
+  />
 
-  {/* Email text */}
-  <p className="text-xs sm:text-base mb-3 sm:mb-6 text-gray-200">
-    {language === "en"
-      ? "Ready to watch? Enter your email to create or restart your membership."
-      : "देखने के लिए तैयार हैं? अपनी मेंबरशिप शुरू या फिर से चालू करने के लिए ईमेल डालें."}
-  </p>
+  {/* OVERLAYS */}
+  <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/85 to-transparent z-10" />
+  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10" />
 
-  {/* Email + Button */}
-   <div className="flex flex-col sm:flex-row gap-2 items-center">
+  {/* GLOW EFFECTS */}
+  <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse z-10" />
+  <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl z-10" />
+
+  {/* CONTENT */}
+  <div className="relative z-20 max-w-3xl">
+  
+
+    <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-4 sm:mb-6 leading-tight">
+      <span className="bg-gradient-to-r from-white via-cyan-100 to-blue-200 bg-clip-text text-transparent">
+        {language === "en"
+          ? "Stream Like Never Before"
+          : "पहले कभी न देखे गए तरीके से स्ट्रीमिंग करें"}
+      </span>
+    </h1>
+
+    <p className="text-base sm:text-xl text-gray-300 mb-4 sm:mb-8 max-w-2xl leading-relaxed">
+      {language === "en"
+        ? "Unlimited movies, shows, and exclusive originals. Experience entertainment redefined."
+        : "असीमित फिल्में, शो और विशेष ओरिजिनल कंटेंट। मनोरंजन को नए सिरे से परिभाषित करने का अनुभव करें।"}
+    </p>
+
+    {/* EMAIL + BUTTON */}
+    <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email address"
-        className="w-full sm:w-[380px] px-3 py-2 text-sm rounded bg-black/60 border border-gray-500 text-white"
+        placeholder={language === "en" ? "Your email address" : "आपका ईमेल"}
+        className="flex-1 px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-slate-800/60 border border-slate-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition"
       />
-
       <button
         onClick={handleStart}
-        className="bg-red-600 px-4 py-2 rounded text-white font-semibold"
+        className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition transform hover:scale-105 shadow-lg shadow-blue-500/40 text-sm sm:text-base whitespace-nowrap"
       >
-        Get Started &gt;
+        {language === "en" ? "Get Started" : "शुरु करें"} →
       </button>
     </div>
 
-</div>
+    <p className="text-xs sm:text-sm text-gray-400 mt-4">
+      {language === "en"
+        ? "7 days free. No credit card required."
+        : "7 दिन मुफ्त। क्रेडिट कार्ड की जरूरत नहीं।"}
+    </p>
+  </div>
+</section>
 
-      </section>
 
-      {/* TRENDING ROW */}
-     <section className="px-4 sm:px-6 lg:px-10 py-6 sm:py-12 -mt-24 relative z-20">
-  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
-    {language === "en" ? "Trending Now" : "अब ट्रेंडिंग"}
+      {/* TRENDING SECTION */}
+    {/* TRENDING SECTION */}
+<section className="px-4 sm:px-8 py-12 sm:py-20 relative z-20">
+  <h3 className="text-2xl sm:text-4xl font-black mb-8 sm:mb-10">
+    {language === "en" ? "Trending Now" : "अभी ट्रेंडिंग"}
   </h3>
 
   <div className="relative group">
-
-    {/* MOVIE ROW */}
-    <div className="flex gap-3 overflow-hidden">
+    {/* MOVIES */}
+    <div className="flex gap-3 overflow-hidden pb-4">
       {visibleMovies.map((movie) => (
         <div
           key={movie.id}
           onClick={() => setSelectedMovie(movie)}
-          className={`flex-shrink-0 cursor-pointer
-            ${itemsPerView === 2 ? "w-1/2" : "w-1/4"}`}
+          className={`flex-shrink-0 cursor-pointer transition-transform duration-300 
+          ${itemsPerView === 2 ? "w-1/2" : "w-1/4"} hover:scale-105`}
         >
-          <div className="relative overflow-hidden rounded-md">
+          <div className="relative overflow-hidden rounded-xl group/card">
             <img
               src={movie.img}
-              className="w-full aspect-[2/3] object-cover transition-transform duration-300 hover:scale-110"
+              alt={movie.title[language]}
+              className="w-full aspect-[2/3] object-cover transition-transform duration-500 
+              group-hover/card:scale-110 group-hover/card:brightness-125"
             />
-           <div className="absolute inset-0 bg-black/0 hover:bg-black/40 
-                transition flex items-center justify-center
-                pointer-events-none">
-  <Play
-    size={48}
-    className="opacity-0 hover:opacity-100 transition"
-  />
-</div>
 
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent 
+              opacity-0 group-hover/card:opacity-100 transition 
+              flex items-center justify-center"
+            >
+              <button className="bg-cyan-500 hover:bg-cyan-400 text-black p-3 rounded-full transition transform hover:scale-110 shadow-lg">
+                <Play size={24} fill="currentColor" />
+              </button>
+            </div>
           </div>
 
-          <h4 className="mt-2 text-xs sm:text-sm font-semibold truncate">
+          <h4 className="mt-3 text-sm sm:text-base font-bold truncate">
             {movie.title[language]}
           </h4>
           <p className="text-xs text-gray-400">{movie.year}</p>
@@ -347,215 +404,169 @@ const prev = () => {
     </div>
 
     {/* LEFT ARROW */}
- {startIndex > 0 && (
-  <button
-    onClick={prev}
-    className="
-      absolute left-1 top-1/2 -translate-y-1/2 z-10
-      bg-black/70 hover:bg-black/90
-      p-2 sm:p-3 rounded-full
-      transition
-      opacity-100 sm:opacity-0 sm:group-hover:opacity-100
-    "
-  >
-    <ChevronLeft size={22} className="sm:size-[26]" />
-  </button>
-)}
-
+    {startIndex > 0 && (
+      <button
+        onClick={prev}
+        className="
+          absolute left-0 top-1/2 sm:top-1/3 -translate-y-1/2 z-10
+          bg-gradient-to-r from-cyan-600 to-blue-600
+          hover:from-cyan-500 hover:to-blue-500
+          p-2 sm:p-3 rounded-full transition
+          opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+          shadow-lg
+        "
+      >
+        <ChevronLeft size={22} />
+      </button>
+    )}
 
     {/* RIGHT ARROW */}
-   {startIndex + itemsPerView < movies.length && (
-  <button
-    onClick={next}
-    className="
-      absolute right-1 top-1/2 -translate-y-1/2 z-10
-      bg-black/70 hover:bg-black/90
-      p-2 sm:p-3 rounded-full
-      transition
-      opacity-100 sm:opacity-0 sm:group-hover:opacity-100
-    "
+    {startIndex + itemsPerView < movies.length && (
+      <button
+        onClick={next}
+        className="
+          absolute right-0 top-1/2 sm:top-1/3 -translate-y-1/2 z-10
+          bg-gradient-to-r from-cyan-600 to-blue-600
+          hover:from-cyan-500 hover:to-blue-500
+          p-2 sm:p-3 rounded-full transition
+          opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+          shadow-lg
+        "
+      >
+        <ChevronRight size={22} />
+      </button>
+    )}
+  </div>
+</section>
+
+
+      {/* FEATURES SECTION */}
+      <section className="relative px-4 sm:px-8 py-14 sm:py-20
+  bg-gradient-to-b from-slate-900/60 via-slate-950 to-black overflow-hidden"
+>
+  {/* Soft background glow */}
+  <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute -top-32 left-1/2 -translate-x-1/2
+      w-[600px] h-[600px] bg-cyan-500/10 blur-3xl rounded-full" />
+  </div>
+
+  <h2 className="relative z-10 text-3xl sm:text-4xl md:text-5xl
+    font-black text-center mb-10 sm:mb-14 tracking-tight"
   >
-    <ChevronRight size={22} className="sm:size-[26]" />
-  </button>
-)}
+    {language === "en" ? "Why Choose CinemaFlow?" : "CinemaFlow को क्यों चुनें"}
+  </h2>
 
+  <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+    gap-6 sm:gap-8 max-w-7xl mx-auto"
+  >
+    {features.map((feature, idx) => {
+      const Icon = feature.icon;
+      return (
+        <div
+          key={idx}
+          className="group relative rounded-2xl p-6 sm:p-8
+            bg-gradient-to-br from-slate-800/60 to-slate-900/40
+            border border-slate-700/40
+            transition-all duration-300
+            hover:-translate-y-2
+            hover:border-cyan-500/50
+            hover:shadow-2xl hover:shadow-cyan-500/20"
+        >
+          {/* hover glow */}
+          <div className="absolute inset-0 rounded-2xl
+            bg-gradient-to-br from-cyan-500/0 to-blue-600/0
+            group-hover:from-cyan-500/10 group-hover:to-blue-600/10
+            transition-all duration-300"
+          />
 
+          <div className="relative z-10">
+            <div className="mb-4 inline-flex items-center justify-center
+              w-12 h-12 rounded-xl
+              bg-gradient-to-br from-cyan-500/20 to-blue-600/20
+              border border-cyan-500/30
+              group-hover:scale-110 transition"
+            >
+              <Icon size={22} className="text-cyan-400" />
+            </div>
+
+            <h3 className="text-lg sm:text-xl font-bold mb-2">
+              {feature.title[language]}
+            </h3>
+
+            <p className="text-sm text-gray-400 leading-relaxed">
+              {feature.desc[language]}
+            </p>
+          </div>
+        </div>
+      );
+    })}
   </div>
 </section>
-
-<section className="bg-black px-4 sm:px-6 lg:px-16 py-14 sm:py-20 border-t border-gray-800">
-  <div className="max-w-6xl mx-auto">
-
-    {/* Heading */}
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 sm:mb-14">
-      {language === "en" ? "More reasons to join" : "शामिल होने के और कारण"}
-    </h2>
-
-    {/* Cards */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-      {/* CARD 1 */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
-                      border border-gray-800 p-6 hover:scale-[1.03] transition">
-        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
-        <h3 className="text-lg sm:text-xl font-semibold mb-3">
-          {language === "en" ? "Enjoy on your TV" : "अपने टीवी पर देखें"}
-        </h3>
-        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-          {language === "en"
-            ? "Watch on Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
-            : "स्मार्ट टीवी, प्लेस्टेशन, एक्सबॉक्स, क्रोमकास्ट, एप्पल टीवी और अधिक पर देखें।"}
-        </p>
-      </div>
-
-      {/* CARD 2 */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
-                      border border-gray-800 p-6 hover:scale-[1.03] transition">
-        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
-        <h3 className="text-lg sm:text-xl font-semibold mb-3">
-          {language === "en"
-            ? "Download to watch offline"
-            : "ऑफ़लाइन देखने के लिए डाउनलोड करें"}
-        </h3>
-        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-          {language === "en"
-            ? "Save your favourites easily and always have something to watch."
-            : "अपने पसंदीदा शो सेव करें और कभी भी देखें।"}
-        </p>
-      </div>
-
-      {/* CARD 3 */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
-                      border border-gray-800 p-6 hover:scale-[1.03] transition">
-        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
-        <h3 className="text-lg sm:text-xl font-semibold mb-3">
-          {language === "en" ? "Watch everywhere" : "हर जगह देखें"}
-        </h3>
-        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-          {language === "en"
-            ? "Stream unlimited movies and TV shows on your phone, tablet, laptop and TV."
-            : "अपने फोन, टैबलेट, लैपटॉप और टीवी पर अनलिमिटेड देखें।"}
-        </p>
-      </div>
-
-      {/* CARD 4 */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900 to-black
-                      border border-gray-800 p-6 hover:scale-[1.03] transition">
-        <div className="absolute inset-0 bg-red-600/10 opacity-0 hover:opacity-100 transition" />
-        <h3 className="text-lg sm:text-xl font-semibold mb-3">
-          {language === "en"
-            ? "Create profiles for kids"
-            : "बच्चों के लिए प्रोफाइल बनाएं"}
-        </h3>
-        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-          {language === "en"
-            ? "Send kids on adventures with their favourite characters in a space made just for them."
-            : "बच्चों के लिए सुरक्षित प्रोफाइल में उनके पसंदीदा किरदार।"}
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 
 
       {/* FAQ SECTION */}
-      <section className="bg-black px-4 sm:px-6 lg:px-16 py-6 sm:py-16 border-t border-gray-800">
+      <section className="px-4 sm:px-8 py-10 sm:py-14">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10">
-            {language === "en"
-              ? "Frequently Asked Questions"
-              : "अक्सर पूछे जाने वाले प्रश्न"}
+          <h2 className="text-3xl sm:text-4xl font-black text-center mb-12 sm:mb-14">
+            {language === "en" ? "Frequently Asked Questions" : "अक्सर पूछे जाने वाले सवाल"}
           </h2>
 
-          <div className="space-y-2 sm:space-y-3">
+          <div className="space-y-3">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-gray-800">
+              <div key={index} className="border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/30 transition">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 text-left text-base sm:text-lg md:text-xl font-medium hover:bg-gray-700 transition"
+                  className="w-full flex justify-between items-center px-6 sm:px-8 py-5 text-left bg-gradient-to-r from-slate-800/30 to-transparent hover:from-slate-800/50 transition"
                 >
-                  <span>{faq.question[language]}</span>
-                  <span className={`text-3xl transition-transform ${openIndex === index ? "rotate-45" : ""}`}>
+                  <span className="font-semibold text-base sm:text-lg">{faq.question[language]}</span>
+                  <span className={`text-2xl text-cyan-400 transition-transform duration-300 ${openIndex === index ? "rotate-45" : ""}`}>
                     +
                   </span>
                 </button>
 
                 {openIndex === index && (
-                  <div className="px-4 sm:px-6 py-4 sm:py-5 text-sm sm:text-base md:text-lg text-gray-200 bg-gray-900 border-t border-gray-700 leading-relaxed">
+                  <div className="px-6 sm:px-8 py-5 bg-slate-900/50 border-t border-slate-700/50 text-sm sm:text-base text-gray-300 leading-relaxed">
                     {faq.answer[language]}
                   </div>
                 )}
               </div>
             ))}
           </div>
-
-         
-   
-
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-black border-t border-gray-800 px-4 sm:px-6 lg:px-16 py-10 sm:py-12 text-gray-400 text-xs sm:text-sm">
+      <footer className="border-t border-slate-700 bg-slate-950 px-4 sm:px-8 py-12 sm:py-16 text-gray-400 text-xs sm:text-sm">
         <div className="max-w-7xl mx-auto">
-          <p className="mb-6">
-            {language === "en" ? "Questions? Call" : "सवाल? कॉल करें"}{" "}
-            <a href="tel:000-800-040-1843" className="hover:text-white transition">
-              70-11-22-7136
-            </a>
-          </p>
+         
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-3 sm:gap-y-4 mb-6 sm:mb-8">
-            {[
-              "FAQ",
-              "Help Centre",
-              "Account",
-              "Media Centre",
-              "Investor Relations",
-              "Jobs",
-              "Ways to Watch",
-              "Terms of Use",
-              "Privacy",
-              "Cookie Preferences",
-              "Corporate Information",
-              "Contact Us",
-              "Speed Test",
-              "Legal Notices",
-              "Only on Netflix"
-            ].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="hover:text-white transition"
-              >
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+            {["Help Centre", "Account", "Media", "Jobs", "Terms", "Privacy", "Contact", "Legal", "Cookies", "Only CinemaFlow"].map((item) => (
+              <a key={item} href="#" className="hover:text-cyan-400 transition">
                 {item}
               </a>
             ))}
           </div>
 
-          <div className="mb-4 sm:mb-6">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-black border border-gray-600 text-white text-xs sm:text-sm px-3 py-2 rounded hover:border-gray-400 transition"
-            >
-              <option value="en">English</option>
-              <option value="hi">हिंदी</option>
-            </select>
-          </div>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="bg-slate-800/70 border border-slate-600 text-white text-xs px-3 py-2 rounded-lg hover:border-cyan-400/50 transition mb-6"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+          </select>
 
-          <p className="text-xs text-gray-500">
-            Netflix India © 2024
+          <p className="text-xs text-gray-600">
+            Questions? Contact us at <a href="tel:1-800-CINEMA" className="text-cyan-400 hover:text-cyan-300">1-800-CINEMA</a>
           </p>
         </div>
       </footer>
 
       {/* MODAL */}
       {selectedMovie && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900 max-w-4xl w-full rounded-lg overflow-hidden max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-slate-900 max-w-4xl w-full rounded-2xl overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl shadow-cyan-500/20">
             <div className="relative">
               <iframe
                 src={selectedMovie.trailer}
@@ -564,37 +575,27 @@ const prev = () => {
               />
               <button
                 onClick={() => setSelectedMovie(null)}
-                className="absolute top-2 right-2 bg-black/70 hover:bg-black p-2 rounded-full transition"
+                className="absolute top-4 right-4 bg-slate-950/70 hover:bg-slate-950 p-2 rounded-full transition shadow-lg"
               >
                 ✕
               </button>
             </div>
-            <div className="p-4 sm:p-6">
-              <div className="flex justify-between items-start mb-3">
-                <div>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">
-                    {selectedMovie.title[language]}
-                  </h2>
-                  <div className="flex gap-2 flex-wrap text-xs sm:text-sm text-gray-300">
-                    <span className="border border-gray-500 px-2 py-1">{selectedMovie.rating}</span>
-                    <span>{selectedMovie.year}</span>
-                  </div>
-                </div>
+            <div className="p-6 sm:p-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3">{selectedMovie.title[language]}</h2>
+              <div className="flex gap-3 mb-4 flex-wrap">
+                <span className="border border-cyan-400/50 px-3 py-1 rounded-lg text-sm text-cyan-300">{selectedMovie.rating}</span>
+                <span className="text-gray-400">{selectedMovie.year}</span>
               </div>
-              <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
-                {selectedMovie.genres[language]}
-              </p>
-              <p className="text-sm sm:text-base text-gray-200 mb-6 leading-relaxed">
-                {selectedMovie.description[language]}
-              </p>
-              <div className="flex gap-2 sm:gap-4">
-                <button className="bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded font-bold hover:bg-gray-300 transition flex items-center gap-2">
-                  <Play size={18} />
-                  <span className="text-sm sm:text-base">Play</span>
+              <p className="text-cyan-300 text-sm font-semibold mb-4">{selectedMovie.genres[language]}</p>
+              <p className="text-gray-300 mb-6 text-sm sm:text-base leading-relaxed">{selectedMovie.description[language]}</p>
+              <div className="flex gap-4">
+                <button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 px-6 py-3 rounded-lg font-bold transition transform hover:scale-105 flex items-center gap-2 shadow-lg shadow-cyan-500/30">
+                  <Play size={18} fill="currentColor" />
+                  Play
                 </button>
                 <button
                   onClick={() => setSelectedMovie(null)}
-                  className="bg-gray-600/50 text-white px-4 sm:px-6 py-2 sm:py-3 rounded font-bold hover:bg-gray-600 transition text-sm sm:text-base"
+                  className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-bold transition"
                 >
                   Close
                 </button>
