@@ -4,6 +4,7 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import ResetPassword from "./Components/ResetPassword";
 import Dashboard from "./Components/Dashboard";
+import Register from "./Components/Register";
 
 
 
@@ -20,6 +21,7 @@ function App() {
        <Route path="/login" element={<Login/>}></Route>
        <Route path="/reset-password/:token" element={<ResetPassword/>}></Route>
        <Route path="/dashboard" element={<Dashboard/>}></Route>
+       <Route path="register" element={<Register/>}></Route>
        
 
 

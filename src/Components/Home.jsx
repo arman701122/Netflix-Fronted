@@ -130,8 +130,8 @@ const features = [
 
 const faqs = [
   {
-    question: { en: "What is CinemaFlow?", hi: "CinemaFlow क्या है?" },
-    answer: { en: "CinemaFlow is a premium streaming platform offering thousands of movies, series, and exclusive content from around the world.", hi: "CinemaFlow एक प्रीमियम स्ट्रीमिंग प्लेटफॉर्म है जो दुनिया भर से हजारों फिल्में और सिरीज देता है।" }
+    question: { en: "What is Netflix?", hi: "Netflix क्या है?" },
+    answer: { en: "Netflix is a premium streaming platform offering thousands of movies, series, and exclusive content from around the world.", hi: "Netflix एक प्रीमियम स्ट्रीमिंग प्लेटफॉर्म है जो दुनिया भर से हजारों फिल्में और सिरीज देता है।" }
   },
   {
     question: { en: "How much does it cost?", hi: "इसकी कीमत कितनी है?" },
@@ -247,19 +247,14 @@ const [lastScrollY, setLastScrollY] = useState(0);
 
 
   {/* LOGO */}
-  <div className="flex items-center select-none">
-    <span
-      className="text-2xl sm:text-3xl font-extrabold text-white
-      tracking-[-0.06em]"
-      style={{
-        fontFamily: "'Bebas Neue', 'Oswald', sans-serif",
-        transform: "skewX(-8deg)",
-        display: "inline-block",
-      }}
-    >
-      CINEMAFLOW
-    </span>
-  </div>
+ <div className="flex items-center select-none">
+  <img
+    src="Logonetflix.png"
+    alt="Netflix"
+    className="h-10 sm:h-12 object-contain"
+  />
+</div>
+
 
   {/* RIGHT CONTROLS */}
   <div className="flex items-center gap-3 sm:gap-6">
@@ -272,7 +267,7 @@ const [lastScrollY, setLastScrollY] = useState(0);
       text-xs sm:text-sm
       rounded-lg
       outline-none
-      focus:border-cyan-400
+      focus:border-red-400
       transition"
     >
       <option value="en">English</option>
@@ -281,13 +276,13 @@ const [lastScrollY, setLastScrollY] = useState(0);
 
     <a
       href="/login"
-      className="bg-cyan-500/90 hover:bg-cyan-400
+      className="bg-red-600/90 hover:bg-red-500
       text-white text-xs sm:text-sm font-bold
       px-4 sm:px-6 py-2
       rounded-lg
       transition-transform duration-300
       hover:scale-105
-      shadow-md shadow-cyan-500/30"
+      shadow-md shadow-red-600/30"
     >
       {language === "en" ? "Sign In" : "साइन इन"}
     </a>
@@ -312,43 +307,70 @@ const [lastScrollY, setLastScrollY] = useState(0);
   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10" />
 
   {/* GLOW EFFECTS */}
-  <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse z-10" />
-  <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl z-10" />
+  <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse z-10" />
+  <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-red-600/10 rounded-full blur-3xl z-10" />
 
   {/* CONTENT */}
   <div className="relative z-20 max-w-3xl">
   
 
     <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-4 sm:mb-6 leading-tight">
-      <span className="bg-gradient-to-r from-white via-cyan-100 to-blue-200 bg-clip-text text-transparent">
+      <span className="bg-gradient-to-r from-white via-red-100 to-red-200 bg-clip-text text-transparent">
         {language === "en"
-          ? "Stream Like Never Before"
-          : "पहले कभी न देखे गए तरीके से स्ट्रीमिंग करें"}
+          ? "Unlimited movies, TV shows and more"
+          : "असीमित फिल्में, टीवी शो और बहुत कुछ"}
       </span>
     </h1>
 
     <p className="text-base sm:text-xl text-gray-300 mb-4 sm:mb-8 max-w-2xl leading-relaxed">
       {language === "en"
-        ? "Unlimited movies, shows, and exclusive originals. Experience entertainment redefined."
-        : "असीमित फिल्में, शो और विशेष ओरिजिनल कंटेंट। मनोरंजन को नए सिरे से परिभाषित करने का अनुभव करें।"}
+        ? "Watch anywhere. Cancel anytime. Ready to watch? Enter your email to create or restart your membership."
+        : "कहीं भी देखें। कभी भी रद्द करें। देखने के लिए तैयार हैं? अपनी सदस्यता बनाने या फिर से शुरू करने के लिए अपना ईमेल दर्ज करें।"}
     </p>
 
     {/* EMAIL + BUTTON */}
-    <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={language === "en" ? "Your email address" : "आपका ईमेल"}
-        className="flex-1 px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-slate-800/60 border border-slate-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition"
-      />
-      <button
-        onClick={handleStart}
-        className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition transform hover:scale-105 shadow-lg shadow-blue-500/40 text-sm sm:text-base whitespace-nowrap"
-      >
-        {language === "en" ? "Get Started" : "शुरु करें"} →
-      </button>
-    </div>
+  {/* EMAIL + BUTTON */}
+<div className="flex flex-col sm:flex-row gap-3 sm:items-center max-w-xl">
+  <input
+    type="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder={language === "en" ? "Email address" : "ईमेल पता"}
+    className="
+      w-full sm:flex-1
+      px-5 py-3 sm:py-4
+      text-sm sm:text-base
+      rounded-lg
+      bg-slate-800/60
+      border border-slate-700
+      text-white placeholder-gray-500
+      focus:outline-none focus:border-red-400
+      focus:ring-2 focus:ring-red-400/20
+      transition
+    "
+  />
+
+  <button
+    onClick={handleStart}
+    className="
+      w-full sm:w-auto
+      bg-gradient-to-r from-red-600 to-red-700
+      hover:from-red-500 hover:to-red-600
+      text-white font-bold
+      px-6 sm:px-8
+      py-3 sm:py-4
+      rounded-lg
+      transition
+      transform hover:scale-105
+      shadow-lg shadow-red-600/40
+      text-sm sm:text-base
+      whitespace-nowrap
+    "
+  >
+    {language === "en" ? "Get Started" : "शुरु करें"} →
+  </button>
+</div>
+
 
     <p className="text-xs sm:text-sm text-gray-400 mt-4">
       {language === "en"
@@ -389,7 +411,7 @@ const [lastScrollY, setLastScrollY] = useState(0);
               opacity-0 group-hover/card:opacity-100 transition 
               flex items-center justify-center"
             >
-              <button className="bg-cyan-500 hover:bg-cyan-400 text-black p-3 rounded-full transition transform hover:scale-110 shadow-lg">
+              <button className="bg-red-600 hover:bg-red-500 text-white p-3 rounded-full transition transform hover:scale-110 shadow-lg">
                 <Play size={24} fill="currentColor" />
               </button>
             </div>
@@ -409,8 +431,8 @@ const [lastScrollY, setLastScrollY] = useState(0);
         onClick={prev}
         className="
           absolute left-0 top-1/2 sm:top-1/3 -translate-y-1/2 z-10
-          bg-gradient-to-r from-cyan-600 to-blue-600
-          hover:from-cyan-500 hover:to-blue-500
+          bg-gradient-to-r from-red-600 to-red-700
+          hover:from-red-500 hover:to-red-600
           p-2 sm:p-3 rounded-full transition
           opacity-100 sm:opacity-0 sm:group-hover:opacity-100
           shadow-lg
@@ -426,8 +448,8 @@ const [lastScrollY, setLastScrollY] = useState(0);
         onClick={next}
         className="
           absolute right-0 top-1/2 sm:top-1/3 -translate-y-1/2 z-10
-          bg-gradient-to-r from-cyan-600 to-blue-600
-          hover:from-cyan-500 hover:to-blue-500
+          bg-gradient-to-r from-red-600 to-red-700
+          hover:from-red-500 hover:to-red-600
           p-2 sm:p-3 rounded-full transition
           opacity-100 sm:opacity-0 sm:group-hover:opacity-100
           shadow-lg
@@ -447,13 +469,13 @@ const [lastScrollY, setLastScrollY] = useState(0);
   {/* Soft background glow */}
   <div className="absolute inset-0 pointer-events-none">
     <div className="absolute -top-32 left-1/2 -translate-x-1/2
-      w-[600px] h-[600px] bg-cyan-500/10 blur-3xl rounded-full" />
+      w-[600px] h-[600px] bg-red-500/10 blur-3xl rounded-full" />
   </div>
 
   <h2 className="relative z-10 text-3xl sm:text-4xl md:text-5xl
     font-black text-center mb-10 sm:mb-14 tracking-tight"
   >
-    {language === "en" ? "Why Choose CinemaFlow?" : "CinemaFlow को क्यों चुनें"}
+    {language === "en" ? "Why Choose Netflix?" : "Netflix को क्यों चुनें"}
   </h2>
 
   <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
@@ -469,24 +491,24 @@ const [lastScrollY, setLastScrollY] = useState(0);
             border border-slate-700/40
             transition-all duration-300
             hover:-translate-y-2
-            hover:border-cyan-500/50
-            hover:shadow-2xl hover:shadow-cyan-500/20"
+            hover:border-red-500/50
+            hover:shadow-2xl hover:shadow-red-500/20"
         >
           {/* hover glow */}
           <div className="absolute inset-0 rounded-2xl
-            bg-gradient-to-br from-cyan-500/0 to-blue-600/0
-            group-hover:from-cyan-500/10 group-hover:to-blue-600/10
+            bg-gradient-to-br from-red-500/0 to-red-600/0
+            group-hover:from-red-500/10 group-hover:to-red-600/10
             transition-all duration-300"
           />
 
           <div className="relative z-10">
             <div className="mb-4 inline-flex items-center justify-center
               w-12 h-12 rounded-xl
-              bg-gradient-to-br from-cyan-500/20 to-blue-600/20
-              border border-cyan-500/30
+              bg-gradient-to-br from-red-500/20 to-red-600/20
+              border border-red-500/30
               group-hover:scale-110 transition"
             >
-              <Icon size={22} className="text-cyan-400" />
+              <Icon size={22} className="text-red-400" />
             </div>
 
             <h3 className="text-lg sm:text-xl font-bold mb-2">
@@ -513,13 +535,13 @@ const [lastScrollY, setLastScrollY] = useState(0);
 
           <div className="space-y-3">
             {faqs.map((faq, index) => (
-              <div key={index} className="border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/30 transition">
+              <div key={index} className="border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/30 transition">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                   className="w-full flex justify-between items-center px-6 sm:px-8 py-5 text-left bg-gradient-to-r from-slate-800/30 to-transparent hover:from-slate-800/50 transition"
                 >
                   <span className="font-semibold text-base sm:text-lg">{faq.question[language]}</span>
-                  <span className={`text-2xl text-cyan-400 transition-transform duration-300 ${openIndex === index ? "rotate-45" : ""}`}>
+                  <span className={`text-2xl text-red-400 transition-transform duration-300 ${openIndex === index ? "rotate-45" : ""}`}>
                     +
                   </span>
                 </button>
@@ -541,8 +563,8 @@ const [lastScrollY, setLastScrollY] = useState(0);
          
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-            {["Help Centre", "Account", "Media", "Jobs", "Terms", "Privacy", "Contact", "Legal", "Cookies", "Only CinemaFlow"].map((item) => (
-              <a key={item} href="#" className="hover:text-cyan-400 transition">
+            {["Help Centre", "Account", "Media", "Jobs", "Terms", "Privacy", "Contact", "Legal", "Cookies", "Only Netflix"].map((item) => (
+              <a key={item} href="#" className="hover:text-red-400 transition">
                 {item}
               </a>
             ))}
@@ -551,14 +573,14 @@ const [lastScrollY, setLastScrollY] = useState(0);
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
-            className="bg-slate-800/70 border border-slate-600 text-white text-xs px-3 py-2 rounded-lg hover:border-cyan-400/50 transition mb-6"
+            className="bg-slate-800/70 border border-slate-600 text-white text-xs px-3 py-2 rounded-lg hover:border-red-400/50 transition mb-6"
           >
             <option value="en">English</option>
             <option value="hi">हिंदी</option>
           </select>
 
           <p className="text-xs text-gray-600">
-            Questions? Contact us at <a href="tel:1-800-CINEMA" className="text-cyan-400 hover:text-cyan-300">1-800-CINEMA</a>
+            Questions? Contact us at <a href="tel:1-800-NETFLIX" className="text-red-400 hover:text-red-300">1-800-NETFLIX</a>
           </p>
         </div>
       </footer>
@@ -566,7 +588,7 @@ const [lastScrollY, setLastScrollY] = useState(0);
       {/* MODAL */}
       {selectedMovie && (
         <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-slate-900 max-w-4xl w-full rounded-2xl overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl shadow-cyan-500/20">
+          <div className="bg-slate-900 max-w-4xl w-full rounded-2xl overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl shadow-red-500/20">
             <div className="relative">
               <iframe
                 src={selectedMovie.trailer}
@@ -583,13 +605,13 @@ const [lastScrollY, setLastScrollY] = useState(0);
             <div className="p-6 sm:p-8">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3">{selectedMovie.title[language]}</h2>
               <div className="flex gap-3 mb-4 flex-wrap">
-                <span className="border border-cyan-400/50 px-3 py-1 rounded-lg text-sm text-cyan-300">{selectedMovie.rating}</span>
+                <span className="border border-red-400/50 px-3 py-1 rounded-lg text-sm text-red-300">{selectedMovie.rating}</span>
                 <span className="text-gray-400">{selectedMovie.year}</span>
               </div>
-              <p className="text-cyan-300 text-sm font-semibold mb-4">{selectedMovie.genres[language]}</p>
+              <p className="text-red-300 text-sm font-semibold mb-4">{selectedMovie.genres[language]}</p>
               <p className="text-gray-300 mb-6 text-sm sm:text-base leading-relaxed">{selectedMovie.description[language]}</p>
               <div className="flex gap-4">
-                <button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 px-6 py-3 rounded-lg font-bold transition transform hover:scale-105 flex items-center gap-2 shadow-lg shadow-cyan-500/30">
+                <button className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-3 rounded-lg font-bold transition transform hover:scale-105 flex items-center gap-2 shadow-lg shadow-red-600/30">
                   <Play size={18} fill="currentColor" />
                   Play
                 </button>

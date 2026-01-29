@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Home, Tv, Film, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import {  Plus, Check } from "lucide-react";
 
 const movies = [
   {
@@ -20,7 +21,7 @@ const movies = [
     title: "Dune: Part Two",
     description: "Hollywood sci‑fi epic",
     image:
-      "https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg",
+      "https://bigpicturefilmclub.com/wp-content/uploads/2024/03/dune2.jpg",
   },
   {
     id: 2,
@@ -205,7 +206,7 @@ const MovieCard = ({ movie, onPlayTrailer }) => (
     onClick={() => onPlayTrailer(movie.trailer)}
     className="group relative overflow-hidden rounded-xl aspect-video
                cursor-pointer flex-shrink-0
-               shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20
+               shadow-lg hover:shadow-2xl hover:shadow-red-500/20
                transition-all duration-300
                w-[160px] sm:w-64"
   >
@@ -226,9 +227,10 @@ const MovieCard = ({ movie, onPlayTrailer }) => (
                  flex items-end p-3"
     >
       <div className="flex items-center gap-2">
-        <div className="bg-cyan-500 p-2 rounded-full">
+        <div className="bg-red-600 p-2 rounded-full">
           <Play size={16} className="text-white fill-white" />
         </div>
+        
         <span className="text-white font-semibold text-xs sm:text-sm truncate">
           {movie.title}
         </span>
@@ -309,34 +311,35 @@ export default function Dashboard() {
     flex justify-between items-center
     transition-all duration-500 ease-in-out
     ${showHeader ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
-    ${scrollY > 50
+    ${lastScrollY > 50
       ? "bg-slate-900/80 backdrop-blur-xl"
       : "bg-transparent"}
   `}
 >
   {/* Logo */}
-  <div className="flex items-center select-none">
-    <span
-      className="text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.06em]"
-      style={{
-        fontFamily: "'Bebas Neue', 'Oswald', sans-serif",
-        transform: "skewX(-8deg)",
-        display: "inline-block",
-      }}
-    >
-      <Link to="/">CINEMAFLOW</Link>
-    </span>
-  </div>
+ <div className="flex items-center select-none">
+  <Link
+    to="/"
+    className="flex items-center hover:opacity-90 transition"
+  >
+    <img
+      src="/Logonetflix.png"
+      alt="Netflix"
+      className="h-10 sm:h-12 object-contain"
+      draggable="false"
+    />
+  </Link>
+</div>
 
   {/* Desktop Links */}
   <div className="hidden md:flex gap-8">
-    <button className="hover:text-cyan-400 transition font-medium">
+    <button className="hover:text-red-400 transition font-medium">
       Home
     </button>
-    <button className="hover:text-cyan-400 transition font-medium">
+    <button className="hover:text-red-400 transition font-medium">
       TV Shows
     </button>
-    <button className="hover:text-cyan-400 transition font-medium">
+    <button className="hover:text-red-400 transition font-medium">
       Movies
     </button>
   </div>
@@ -356,7 +359,7 @@ export default function Dashboard() {
     </div>
 
     {/* Notification */}
-    <button className="hidden sm:block text-gray-400 hover:text-cyan-400 transition">
+    <button className="hidden sm:block text-gray-400 hover:text-red-400 transition">
       <Bell size={20} />
     </button>
 
@@ -364,7 +367,7 @@ export default function Dashboard() {
     <div className="relative hidden sm:block">
       <button
         onClick={() => setProfileDropdown(!profileDropdown)}
-        className="text-gray-400 hover:text-cyan-400 transition rounded-full p-1 hover:bg-slate-700/40"
+        className="text-gray-400 hover:text-red-400 transition rounded-full p-1 hover:bg-slate-700/40"
       >
         <User size={20} />
       </button>
@@ -390,14 +393,14 @@ export default function Dashboard() {
     {/* Mobile Icons */}
     <button
       onClick={() => setShowSearch(!showSearch)}
-      className="sm:hidden text-gray-400 hover:text-cyan-400 transition p-2 rounded-full hover:bg-slate-700/30"
+      className="sm:hidden text-gray-400 hover:text-red-400 transition p-2 rounded-full hover:bg-slate-700/30"
     >
       <Search size={20} />
     </button>
 
     <button
       onClick={() => setMenuOpen(!menuOpen)}
-      className="sm:hidden text-gray-400 hover:text-cyan-400 transition p-2 rounded-full hover:bg-slate-700/30"
+      className="sm:hidden text-gray-400 hover:text-red-400 transition p-2 rounded-full hover:bg-slate-700/30"
     >
       {menuOpen ? <X size={20} /> : <Menu size={20} />}
     </button>
@@ -426,20 +429,20 @@ export default function Dashboard() {
       {menuOpen && (
         <div className="fixed top-16 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-lg sm:hidden">
           <div className="flex flex-col gap-4 p-4">
-            <button className="text-left hover:text-cyan-400 transition font-medium py-2">
+            <button className="text-left hover:text-red-400 transition font-medium py-2">
               Home
             </button>
-            <button className="text-left hover:text-cyan-400 transition font-medium py-2">
+            <button className="text-left hover:text-red-400 transition font-medium py-2">
               TV Shows
             </button>
-            <button className="text-left hover:text-cyan-400 transition font-medium py-2">
+            <button className="text-left hover:text-red-400 transition font-medium py-2">
               Movies
             </button>
             <hr className="border-slate-700/50" />
-            <button className="text-left hover:text-cyan-400 transition py-2">
+            <button className="text-left hover:text-red-400 transition py-2">
               Notifications
             </button>
-            <button className="text-left hover:text-cyan-400 transition py-2">
+            <button className="text-left hover:text-red-400 transition py-2">
               Profile
             </button>
             <button
@@ -476,9 +479,30 @@ export default function Dashboard() {
                 <p className="text-gray-300 mb-6 text-sm sm:text-base">
                   {movie.description}
                 </p>
-                <button className="bg-cyan-600 hover:bg-cyan-500 px-8 py-3 rounded-full font-semibold flex items-center gap-2 transition">
-                  <Play size={20} className="fill-white" /> Play Now
-                </button>
+  <div className="flex items-center gap-4">
+  {/* PLAY BUTTON */}
+  <button
+    className="flex items-center gap-2 bg-white text-black
+               px-6 py-2 rounded-md font-semibold
+               hover:bg-gray-200 transition"
+  >
+    <Play size={20} className="fill-black" />
+    Play
+  </button>
+
+  {/* MY LIST BUTTON */}
+  <button
+    className="flex items-center gap-2 bg-slate-700/70 text-white
+               px-6 py-2 rounded-md font-semibold
+               hover:bg-slate-600 transition"
+  >
+    <Plus size={20} />
+    My List
+  </button>
+</div>
+
+
+
               </div>
             </div>
           ))}
@@ -491,7 +515,7 @@ export default function Dashboard() {
                 onClick={() => setCurrentSlide(i)}
                 className={`transition-all duration-300 ${
                   i === currentSlide
-                    ? "bg-cyan-400 w-8 h-3 rounded-full"
+                    ? "bg-red-600 w-8 h-3 rounded-full"
                     : "bg-white/50 hover:bg-white/70 w-3 h-3 rounded-full"
                 }`}
               />
@@ -505,14 +529,14 @@ export default function Dashboard() {
         {Object.keys(filteredCategories).length === 0 ? (
           <div className="text-center py-20">
             <p className="text-xl text-gray-400">
-              No results for "<span className="text-cyan-400">{search}</span>"
+              No results for "<span className="text-red-400">{search}</span>"
             </p>
           </div>
         ) : (
           Object.entries(filteredCategories).map(([category, items]) => (
             <div key={category} className="mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold mb-6 flex items-center gap-2">
-                <div className="w-1 h-8 bg-gradient-to-b from-cyan-500 to-blue-600 rounded" />
+                <div className="w-1 h-8 bg-gradient-to-b from-red-600 to-red-700 rounded" />
                 {category}
               </h2>
 
@@ -520,7 +544,7 @@ export default function Dashboard() {
                 {/* Left Arrow */}
                 <button
                   onClick={() => scrollCategory(category, "left")}
-                  className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 p-2 sm:p-3 rounded-full opacity-0 sm:group-hover:opacity-100 hover:opacity-100 transition shadow-lg"
+                  className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 p-2 sm:p-3 rounded-full opacity-0 sm:group-hover:opacity-100 hover:opacity-100 transition shadow-lg"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -542,7 +566,7 @@ export default function Dashboard() {
                 {/* Right Arrow */}
                 <button
                   onClick={() => scrollCategory(category, "right")}
-                  className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 p-2 sm:p-3 rounded-full opacity-0 sm:group-hover:opacity-100 hover:opacity-100 transition shadow-lg"
+                  className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 p-2 sm:p-3 rounded-full opacity-0 sm:group-hover:opacity-100 hover:opacity-100 transition shadow-lg"
                 >
                   <ChevronRight size={20} />
                 </button>
@@ -580,11 +604,11 @@ export default function Dashboard() {
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-slate-950/95 to-slate-950/80 backdrop-blur-lg border-t border-slate-700/50">
 
         <div className="flex justify-around items-center py-3 px-2">
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
             <Home size={22} />
             <span className="text-xs font-semibold">Home</span>
           </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
             <Tv size={22} />
             <span className="text-xs font-semibold">Series</span>
           </button>
@@ -592,20 +616,20 @@ export default function Dashboard() {
           {/* CENTER LOGO BUTTON */}
     <button
   className="w-16 h-16 -mt-10 rounded-full
-             bg-cyan-500 hover:bg-cyan-400
+             bg-red-600 hover:bg-red-500
              flex items-center justify-center
-             shadow-2xl shadow-cyan-500/50
+             shadow-2xl shadow-red-600/50
              transition transform hover:scale-110 active:scale-95"
 >
   <Play size={26} className="text-white ml-1" />
 </button>
 
 
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
             <Film size={22} />
             <span className="text-xs font-semibold">Movies</span>
           </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-cyan-400 transition">
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
             <Settings size={22} />
             <span className="text-xs font-semibold">Settings</span>
           </button>
@@ -621,7 +645,7 @@ export default function Dashboard() {
         <div className="max-w-6xl mx-auto px-6 py-6">
           <p className="mb-6">
             Questions? Call{" "}
-            <span className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition">
+            <span className="text-red-400 hover:text-red-300 cursor-pointer transition">
               70-11-22-7136
             </span>
           </p>
@@ -641,18 +665,18 @@ export default function Dashboard() {
               "Contact Us",
               "Speed Test",
               "Legal Notices",
-              "Only on CinemaFlow",
+              "Only on Netflix",
             ].map((item) => (
               <span
                 key={item}
-                className="hover:text-cyan-400 cursor-pointer transition"
+                className="hover:text-red-400 cursor-pointer transition"
               >
                 {item}
               </span>
             ))}
           </div>
           <p className="mt-6 text-xs text-gray-600">
-            © 2024 CinemaFlow. All rights reserved.
+            © 2024 Netflix. All rights reserved.
           </p>
         </div>
       </footer>
