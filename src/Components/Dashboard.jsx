@@ -47,158 +47,310 @@ const movies = [
 ];
 
 const categories = {
-  Hollywood: [
-    {
-      id: 1,
-      title: "Murder Mystery",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb-v2p19IpAXJ1sa1bTNlW8UhP7cP258MtfA&s",
-      trailer: "https://www.youtube.com/embed/5YEVQDr2f3Q",
-    },
-    {
-      id: 2,
-      title: "The Irishman",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfXS9T5q4DIce28B2Nx8QJpP7sR7bfblF-g&s",
-      trailer: "https://www.youtube.com/embed/WHXxVmeGQUc",
-    },
-    {
-      id: 3,
-      title: "Dark",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6N9WKvhdxIL1V2WyhMNfEcrM51o04o9T7fg&s",
-      trailer: "https://www.youtube.com/embed/ESEUoa-mz2c",
-    },
-    {
-      id: 4,
-      title: "ANACONDA",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIm0bRXWXp0mV6ruez85dhyHzYxiqDs7ALSQ&s",
-      trailer: "https://www.youtube.com/embed/q0UxtQfgz0A",
-    },
-    {
-      id: 13,
-      title: "Avengers",
-      img: "https://cdn.britannica.com/60/182360-050-CD8878D6/Avengers-Age-of-Ultron-Joss-Whedon.jpg",
-      trailer: "https://www.youtube.com/embed/6ZfuNTqbHE8",
-    },
-    {
-      id: 14,
-      title: "Stranger Things",
-      img: "https://deadline.com/wp-content/uploads/2025/11/Stranger-Things-5_33a02d.jpg?w=1024",
-      trailer: "https://www.youtube.com/embed/PssKpzB0Ah0",
-    },
-  ],
-  Bollywood: [
-    {
-      id: 5,
-      title: "Marjawa",
-      img: "https://www.koimoi.com/wp-content/new-galleries/2019/11/box-office-marjaavaan-to-take-a-decent-opening-single-screens-are-the-key-on-the-first-day-001.jpg",
-      trailer: "https://www.youtube.com/embed/L7TbPUOn1hc",
-    },
-    {
-      id: 6,
-      title: "Ek Deewane Ki Deewaniyat",
-      img: "https://c.saavncdn.com/532/Deewaniyat-From-Ek-Deewane-Ki-Deewaniyat-Original-Motion-Picture-Soundtrack-Hindi-2025-20250827010315-500x500.jpg",
-      trailer: "https://www.youtube.com/embed/y9jtbWNAvXc",
-    },
-    {
-      id: 7,
-      title: "Saiyara",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmkrtRPzlwbYqEmj3P3siCZeEPYNy25rIVkw&s",
-      trailer: "https://www.youtube.com/embed/gOOO7eZv0mI"
-    },
-    {
-      id: 8,
-      title: "Sikandar",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-YDVd4PxrdgK1r7Y_i2MT5U9ZCiOncSTyBA&s",
-      trailer: "https://www.youtube.com/embed/4_FGQP9g02k",
-    },
-    {
-      id: 15,
-      title: "Border 2",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZY0ipr9LcZzsM802YqCRL9Ie3vCj9e8Lrqw&s",
-      trailer: "https://www.youtube.com/embed/BgfL0zJnPug",
-    },
-    {
-      id: 16,
-      title: "12 Fail",
-      img: "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/690de3e84d854e0e7600479d/images/LANDSCAPE_169/1640216-h-6b1d26b33811?o=production",
-      trailer: "https://www.youtube.com/embed/avD8D0q7gIw",
-    },
-  ],
-  Chinese: [
-    {
-      id: 9,
-      title: "Crouching Tiger",
-      img: "https://images.justwatch.com/backdrop/336164598/s640/crouching-tiger-hidden-dragon-sword-of-destiny",
-      trailer: "https://www.youtube.com/embed/a3sQIjbrMQw",
-    },
-    {
-      id: 10,
-      title: "Lord of the Monster",
-      img: "https://m.media-amazon.com/images/I/91n7D2tvgML._AC_UF894,1000_QL80_.jpg",
-      trailer: "https://www.youtube.com/embed/QNFQo2575pI",
-    },
-    {
-      id: 11,
-      title: "Ip Man 2",
-      img: "https://m.media-amazon.com/images/M/MV5BOGVjMDEzNjMtMWJmMy00NDdjLWFkMzItOTBhZTE3OWU0YmM4XkEyXkFqcGc@._V1_.jpg",
-      trailer: "https://www.youtube.com/embed/LSXdo4TTJ9A",
-    },
-    {
-      id: 12,
-      title: "The Wandering Earth",
-      img: "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3353/1736871863353-i",
-      trailer: "https://www.youtube.com/embed/0TDII5IkI3Y",
-    },
-    {
-      id: 17,
-      title: "The Monkey King",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOzi-WR4azypn5jkmgMhSSS_QtIBKoYDzjg&s",
-      trailer: "https://www.youtube.com/embed/8InLhRjFJVU",
-    },
-    {
-      id: 18,
-      title: "Journey to the West",
-      img: "https://pic5.iqiyipic.com/image/20250325/21/0c/v_180118265_m_601_en_m1_1013_569.jpg",
-      trailer: "https://www.youtube.com/embed/FJmAlL3AYHI",
-    },
-  ],
-  Horror: [
-    {
-      id: 25,
-      title: "The Conjuring",
-      img: "https://m.media-amazon.com/images/M/MV5BM2U2NGE1OWQtN2FjNi00YmQ2LTliMDAtNzMyYzQ5YTJiNDFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-      trailer: "https://www.youtube.com/embed/FSAz556s0fM",
-    },
-    {
-      id: 26,
-      title: "Annabelle",
-      img: "https://upload.wikimedia.org/wikipedia/en/9/90/Annabelle_film_poster.jpg",
-      trailer: "https://www.youtube.com/embed/paFgQNPGlsg",
-    },
-    {
-      id: 27,
-      title: "IT",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfapkG2cy_IORECaazv_H8ameBppdWB4c_oA&s",
-      trailer: "https://www.youtube.com/embed/xKJmEC5ieOk",
-    },
-    {
-      id: 28,
-      title: "1920",
-      img: "https://m.media-amazon.com/images/I/816YpgC5GoL._AC_UF1000,1000_QL80_.jpg",
-      trailer: "https://www.youtube.com/embed/GZrsEBQuhO0",
-    },
-    {
-      id: 29,
-      title: "1920 Evils Returns",
-      img: "https://m.media-amazon.com/images/M/MV5BZjRjNDJhMWEtNmJkMi00ZDViLWE1YmEtYzFhZWRjZTI4ZjQ2XkEyXkFqcGc@._V1_.jpg",
-      trailer: "https://www.youtube.com/embed/dxK0Z_VaLtk",
-    },
-    {
-      id: 30,
-      title: "Evil Dead Rise",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsn77DDb-bL2sJKUDWLluNyRnEH1KW92eEA&s",
-      trailer: "https://www.youtube.com/embed/4weFxATBEiY",
-    },
-  ],
+Hollywood: [
+  // 🎬 MOVIES
+  {
+    id: 1,
+    title: "Murder Mystery",
+    type: "movie",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb-v2p19IpAXJ1sa1bTNlW8UhP7cP258MtfA&s",
+    trailer: "https://www.youtube.com/embed/5YEVQDr2f3Q",
+  },
+  {
+    id: 2,
+    title: "Avengers: Endgame",
+    type: "movie",
+    img: "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_UF1000,1000_QL80_.jpg",
+    trailer: "https://www.youtube.com/embed/TcMBFSGVi1c",
+  },
+  {
+    id: 3,
+    title: "Inception",
+    type: "movie",
+    img: "https://m.media-amazon.com/images/I/91kFYg4fX3L._AC_UF1000,1000_QL80_.jpg",
+    trailer: "https://www.youtube.com/embed/YoHD9XEInc0",
+  },
+  {
+    id: 4,
+    title: "Interstellar",
+    type: "movie",
+    img: "https://www.tallengestore.com/cdn/shop/products/Interstellar_-_Tallenge_Hollywood_Sci-Fi_Art_Movie_Poster_Collection_6400e127-641e-4478-8a06-f699ae526fad.jpg?v=1577693302",
+    trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
+  },
+  {
+    id: 5,
+    title: "Joker",
+    type: "movie",
+    img: "https://m.media-amazon.com/images/I/71c05lTE03L._AC_UF1000,1000_QL80_.jpg",
+    trailer: "https://www.youtube.com/embed/zAGVQLHvwOY",
+  },
+
+  // 📺 TV SHOWS
+  {
+    id: 6,
+    title: "Stranger Things",
+    type: "tv",
+    img: "https://deadline.com/wp-content/uploads/2025/11/Stranger-Things-5_33a02d.jpg?w=1024",
+    trailer: "https://www.youtube.com/embed/PssKpzB0Ah0",
+  },
+  {
+    id: 7,
+    title: "The Irishman",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfXS9T5q4DIce28B2Nx8QJpP7sR7bfblF-g&s",
+    trailer: "https://www.youtube.com/embed/WHXxVmeGQUc",
+  },
+  {
+    id: 8,
+    title: "Dark",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6N9WKvhdxIL1V2WyhMNfEcrM51o04o9T7fg&s",
+    trailer: "https://www.youtube.com/embed/ESEUoa-mz2c",
+  },
+  {
+    id: 9,
+    title: "Money Heist",
+    type: "tv",
+    img: "https://m.media-amazon.com/images/I/81D+KJkO4SL._AC_UF1000,1000_QL80_.jpg",
+    trailer: "https://www.youtube.com/embed/_InqQJRqGW4",
+  },
+  {
+    id: 10,
+    title: "Breaking Bad",
+    type: "tv",
+    img: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/breaking_bad_4.png",
+    trailer: "https://www.youtube.com/embed/HhesaQXLuRY",
+  },
+],
+
+Bollywood: [
+  // 🎬 MOVIES
+  {
+    id: 5,
+    title: "Marjaavaan",
+    type: "movie",
+    img: "https://www.koimoi.com/wp-content/new-galleries/2019/11/box-office-marjaavaan-to-take-a-decent-opening-single-screens-are-the-key-on-the-first-day-001.jpg",
+    trailer: "https://www.youtube.com/embed/L7TbPUOn1hc",
+  },
+  {
+    id: 6,
+    title: "12th Fail",
+    type: "movie",
+    img: "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/690de3e84d854e0e7600479d/images/LANDSCAPE_169/1640216-h-6b1d26b33811?o=production",
+    trailer: "https://www.youtube.com/embed/avD8D0q7gIw",
+  },
+  {
+    id: 7,
+    title: "Border 2",
+    type: "movie",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZY0ipr9LcZzsM802YqCRL9Ie3vCj9e8Lrqw&s",
+    trailer: "https://www.youtube.com/embed/BgfL0zJnPug",
+  },
+  {
+    id: 8,
+    title: "Sikandar",
+    type: "movie",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-YDVd4PxrdgK1r7Y_i2MT5U9ZCiOncSTyBA&s",
+    trailer: "https://www.youtube.com/embed/4_FGQP9g02k",
+  },
+  {
+    id: 9,
+    title: "Ek Deewane Ki Deewaniyat",
+    type: "movie",
+    img: "https://c.saavncdn.com/532/Deewaniyat-From-Ek-Deewane-Ki-Deewaniyat-Original-Motion-Picture-Soundtrack-Hindi-2025-20250827010315-500x500.jpg",
+    trailer: "https://www.youtube.com/embed/y9jtbWNAvXc",
+  },
+
+  // 📺 TV SHOWS
+  {
+    id: 10,
+    title: "Sacred Games",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWF7qS2ghqTn_40gkmt3YBtpPV4FoTlWcYiw&s",
+    trailer: "https://www.youtube.com/embed/w-Xe8gLBkYQ",
+  },
+  {
+    id: 11,
+    title: "Mirzapur",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROSDmDv8xJ-9Wl2q3a3XHzyHpOwIIgnQWHIg&s",
+    trailer: "https://www.youtube.com/embed/ZNeGF-PvRHY",
+  },
+  {
+    id: 12,
+    title: "The Family Man",
+    type: "tv",
+    img: "https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABcIQS3323bjVMUmlJyasEsryVoCTMiI_etHtIpaeGxXg00J6Zv-pHGrP2BjPBLdXPete--JpQJQCbU3f1-C7wQIqtO4H6LTVbpK5.jpg?r=dc9",
+    trailer: "https://www.youtube.com/embed/XatRGut65VI",
+  },
+  {
+    id: 13,
+    title: "Asur",
+    type: "tv",
+    img: "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/5412/1735212575412-i",
+    trailer: "https://www.youtube.com/embed/6tO8p0Wn3qE",
+  },
+  {
+    id: 14,
+    title: "Paatal Lok",
+    type: "tv",
+    img: "https://sm.mashable.com/mashable_in/seo/default/paatal-lok-review-an-analysis-of-indias-rotting-heart-led-by_j939.jpg",
+    trailer: "https://www.youtube.com/embed/cx2y3f2xZgA",
+  },
+],
+
+Chinese: [
+  // 🎬 MOVIES
+  {
+    id: 9,
+    title: "Crouching Tiger, Hidden Dragon",
+    type: "movie",
+    img: "https://images.justwatch.com/backdrop/336164598/s640/crouching-tiger-hidden-dragon-sword-of-destiny",
+    trailer: "https://www.youtube.com/embed/a3sQIjbrMQw",
+  },
+  {
+    id: 10,
+    title: "Ip Man 2",
+    type: "movie",
+    img: "https://m.media-amazon.com/images/M/MV5BOGVjMDEzNjMtMWJmMy00NDdjLWFkMzItOTBhZTE3OWU0YmM4XkEyXkFqcGc@._V1_.jpg",
+    trailer: "https://www.youtube.com/embed/LSXdo4TTJ9A",
+  },
+  {
+    id: 11,
+    title: "The Wandering Earth",
+    type: "movie",
+    img: "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3353/1736871863353-i",
+    trailer: "https://www.youtube.com/embed/0TDII5IkI3Y",
+  },
+  {
+    id: 12,
+    title: "The Monkey King",
+    type: "movie",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAOzi-WR4azypn5jkmgMhSSS_QtIBKoYDzjg&s",
+    trailer: "https://www.youtube.com/embed/8InLhRjFJVU",
+  },
+  {
+    id: 13,
+    title: "Journey to the West",
+    type: "movie",
+    img: "https://pic5.iqiyipic.com/image/20250325/21/0c/v_180118265_m_601_en_m1_1013_569.jpg",
+    trailer: "https://www.youtube.com/embed/FJmAlL3AYHI",
+  },
+
+  // 📺 TV SHOWS
+  {
+    id: 14,
+    title: "The Untamed",
+    type: "tv",
+    img: "https://m.media-amazon.com/images/S/pv-target-images/d14d8b877114758a1ffea320f34ae6abb28273449cdd13f0c24bd15bd9bf9651.jpg",
+    trailer: "https://www.youtube.com/embed/3P7yJtZp1pA",
+  },
+  {
+    id: 15,
+    title: "Ashes of Love",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6xnzC5URtUBwhpUKMHye62E9RBSPBuSXPJg&s",
+    trailer: "https://www.youtube.com/embed/JY9Jw4q7T0U",
+  },
+  {
+    id: 16,
+    title: "Love Between Fairy and Devil",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQER3khX4-ti4RDflkzr8wncZLBirUM29KwIQ&s",
+    trailer: "https://www.youtube.com/embed/btYf5tY6RkM",
+  },
+  {
+    id: 17,
+    title: "The Longest Day in Chang'an",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYjvxddRo0ktDazRYcGISOyFGjpDrK_K1UBw&s",
+    trailer: "https://www.youtube.com/embed/rJzJ4yM0G5E",
+  },
+  {
+    id: 18,
+    title: "Day and Night",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpBMEUrfKMWXy-co9fRjXMdWPUOLtXIScMvA&s",
+    trailer: "https://www.youtube.com/embed/4l1Kz2yYy5U",
+  },
+],
+
+Horror: [
+  // 🎬 MOVIES
+  {
+    id: 25,
+    title: "The Conjuring",
+    type: "movie",
+    img: "https://m.media-amazon.com/images/M/MV5BM2U2NGE1OWQtN2FjNi00YmQ2LTliMDAtNzMyYzQ5YTJiNDFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    trailer: "https://www.youtube.com/embed/FSAz556s0fM",
+  },
+  {
+    id: 26,
+    title: "Annabelle",
+    type: "movie",
+    img: "https://upload.wikimedia.org/wikipedia/en/9/90/Annabelle_film_poster.jpg",
+    trailer: "https://www.youtube.com/embed/paFgQNPGlsg",
+  },
+  {
+    id: 27,
+    title: "IT",
+    type: "movie",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfapkG2cy_IORECaazv_H8ameBppdWB4c_oA&s",
+    trailer: "https://www.youtube.com/embed/xKJmEC5ieOk",
+  },
+  {
+    id: 28,
+    title: "1920",
+    type: "movie",
+    img: "https://m.media-amazon.com/images/I/816YpgC5GoL._AC_UF1000,1000_QL80_.jpg",
+    trailer: "https://www.youtube.com/embed/GZrsEBQuhO0",
+  },
+  {
+    id: 29,
+    title: "Evil Dead Rise",
+    type: "movie",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsn77DDb-bL2sJKUDWLluNyRnEH1KW92eEA&s",
+    trailer: "https://www.youtube.com/embed/4weFxATBEiY",
+  },
+
+  // 📺 TV SHOWS
+  {
+    id: 30,
+    title: "The Haunting of Hill House",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX_A_dqlx2LMW2oS6HEHlbTusNBBIYj-0ERQ&s",
+    trailer: "https://www.youtube.com/embed/G9OzG53VwIk",
+  },
+  {
+    id: 31,
+    title: "The Haunting of Bly Manor",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlWwvANEoPnGaux-5e9BQIO2IfBrSv1vcA-g&s",
+    trailer: "https://www.youtube.com/embed/tykS7QfTWMQ",
+  },
+  {
+    id: 32,
+    title: "Marianne",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQss3e6e4mNMkJSDNWgQPCjMeCMquKhReo39g&s",
+    trailer: "https://www.youtube.com/embed/q99HbUjvN1M",
+  },
+  {
+    id: 33,
+    title: "The Exorcist (TV Series)",
+    type: "tv",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNHwFzUggZ_Cu3vIPZWaXP5adk7rIHSZUu1w&s",
+    trailer: "https://www.youtube.com/embed/2P9UuYb9QbA",
+  },
+  {
+    id: 34,
+    title: "From",
+    type: "tv",
+    img: "https://m.media-amazon.com/images/S/pv-target-images/5d71845d45c14339aef5e7ccaa2602c2d8dfc9866c654a0187339775a601e321.jpg",
+    trailer: "https://www.youtube.com/embed/pDHqAj4eJcM",
+  },
+],
+
 };
 
 const MovieCard = ({ movie, onPlayTrailer }) => (
@@ -249,20 +401,45 @@ export default function Dashboard() {
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [profileDropdown, setProfileDropdown] = useState(false);
+  const [activeTab, setActiveTab] = useState("home");
+// home | tv | movies
+
   const scrollRefs = useRef({});
 
-  const filteredCategories = useMemo(() => {
-    if (!search.trim()) return categories;
+const filteredCategories = useMemo(() => {
+  let base = categories;
+
+  // SEARCH FILTER
+  if (search.trim()) {
     const filtered = {};
     const lower = search.toLowerCase();
+
     Object.entries(categories).forEach(([cat, items]) => {
       const matched = items.filter((item) =>
         item.title.toLowerCase().includes(lower)
       );
       if (matched.length) filtered[cat] = matched;
     });
-    return filtered;
-  }, [search]);
+
+    base = filtered;
+  }
+
+  // TAB FILTER
+  if (activeTab === "home") return base;
+
+  const tabFiltered = {};
+  Object.entries(base).forEach(([cat, items]) => {
+    const matched = items.filter((item) =>
+      activeTab === "movies"
+        ? item.type === "movie"
+        : item.type === "tv"
+    );
+    if (matched.length) tabFiltered[cat] = matched;
+  });
+
+  return tabFiltered;
+}, [search, activeTab]);
+
 
   // Auto-rotate hero slider
   useEffect(() => {
@@ -333,15 +510,33 @@ export default function Dashboard() {
 
   {/* Desktop Links */}
   <div className="hidden md:flex gap-8">
-    <button className="hover:text-red-400 transition font-medium">
-      Home
-    </button>
-    <button className="hover:text-red-400 transition font-medium">
-      TV Shows
-    </button>
-    <button className="hover:text-red-400 transition font-medium">
-      Movies
-    </button>
+   <button
+  onClick={() => setActiveTab("home")}
+  className={`font-medium transition ${
+    activeTab === "home" ? "text-red-400" : "hover:text-red-400"
+  }`}
+>
+  Home
+</button>
+
+<button
+  onClick={() => setActiveTab("tv")}
+  className={`font-medium transition ${
+    activeTab === "tv" ? "text-red-400" : "hover:text-red-400"
+  }`}
+>
+  TV Shows
+</button>
+
+<button
+  onClick={() => setActiveTab("movies")}
+  className={`font-medium transition ${
+    activeTab === "movies" ? "text-red-400" : "hover:text-red-400"
+  }`}
+>
+  Movies
+</button>
+
   </div>
 
   {/* Right Section */}
@@ -357,12 +552,6 @@ export default function Dashboard() {
         className="bg-transparent ml-2 outline-none text-sm w-full placeholder-gray-500 text-white"
       />
     </div>
-
-    {/* Notification */}
-    <button className="hidden sm:block text-gray-400 hover:text-red-400 transition">
-      <Bell size={20} />
-    </button>
-
     {/* Profile Dropdown */}
     <div className="relative hidden sm:block">
       <button
@@ -604,14 +793,24 @@ export default function Dashboard() {
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-slate-950/95 to-slate-950/80 backdrop-blur-lg border-t border-slate-700/50">
 
         <div className="flex justify-around items-center py-3 px-2">
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
-            <Home size={22} />
-            <span className="text-xs font-semibold">Home</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
-            <Tv size={22} />
-            <span className="text-xs font-semibold">Series</span>
-          </button>
+         <button
+  onClick={() => setActiveTab("home")}
+  className={`flex flex-col items-center gap-1 transition ${
+    activeTab === "home" ? "text-red-400" : "text-gray-400 hover:text-red-400"
+  }`}
+>
+  <Home size={22} />
+  <span className="text-xs font-semibold">Home</span>
+</button>
+          <button
+  onClick={() => setActiveTab("tv")}
+  className={`flex flex-col items-center gap-1 transition ${
+    activeTab === "tv" ? "text-red-400" : "text-gray-400 hover:text-red-400"
+  }`}
+>
+  <Tv size={22} />
+  <span className="text-xs font-semibold">Series</span>
+</button>
 
           {/* CENTER LOGO BUTTON */}
     <button
@@ -624,11 +823,15 @@ export default function Dashboard() {
   <Play size={26} className="text-white ml-1" />
 </button>
 
-
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
-            <Film size={22} />
-            <span className="text-xs font-semibold">Movies</span>
-          </button>
+<button
+  onClick={() => setActiveTab("movies")}
+  className={`flex flex-col items-center gap-1 transition ${
+    activeTab === "movies" ? "text-red-400" : "text-gray-400 hover:text-red-400"
+  }`}
+>
+  <Film size={22} />
+  <span className="text-xs font-semibold">Movies</span>
+</button>
           <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-red-400 transition">
             <Settings size={22} />
             <span className="text-xs font-semibold">Settings</span>
