@@ -543,13 +543,13 @@ const filteredCategories = useMemo(() => {
   <div className="flex items-center gap-3 sm:gap-6">
     {/* Desktop Search */}
     <div className="hidden sm:flex items-center bg-slate-800/60 hover:bg-slate-800 rounded-full px-4 py-2 transition w-44 md:w-64">
-      <Search size={18} className="text-gray-400" />
+      <Search size={18} className="text-white" />
       <input
         type="text"
         placeholder="Search movies..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="bg-transparent ml-2 outline-none text-sm w-full placeholder-gray-500 text-white"
+        className="bg-transparent ml-2 outline-none text-sm w-full placeholder-white text-white"
       />
     </div>
     {/* Profile Dropdown */}
@@ -601,48 +601,78 @@ const filteredCategories = useMemo(() => {
       {showSearch && (
         <div className="fixed top-16 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-lg px-4 py-3 sm:hidden">
           <div className="flex items-center bg-slate-800 rounded-full px-4 py-2">
-            <Search size={18} className="text-gray-400" />
+            <Search size={18} className="text-white" />
             <input
               type="text"
               placeholder="Search movies..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               autoFocus
-              className="bg-transparent ml-2 outline-none text-sm w-full placeholder-gray-500"
+              className="bg-transparent ml-2 outline-none text-sm w-full placeholder-white"
             />
           </div>
         </div>
       )}
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="fixed top-16 left-0 right-0 z-40 bg-slate-900/45 backdrop-blur-lg sm:hidden">
-          <div className="flex flex-col gap-4 p-4">
-            <button className="text-left hover:text-red-400 transition font-medium py-2">
-              Home
-            </button>
-            <button className="text-left hover:text-red-400 transition font-medium py-2">
-              TV Shows
-            </button>
-            <button className="text-left hover:text-red-400 transition font-medium py-2">
-              Movies
-            </button>
-            <hr className="border-slate-700/50" />
-            <button className="text-left hover:text-red-400 transition py-2">
-              Notifications
-            </button>
-            <button className="text-left hover:text-red-400 transition py-2">
-              Profile
-            </button>
-            <button
-              onClick={handleLogout}
-              className="w-full bg-gradient-to-r from-red-600/80 to-red-700/80 hover:from-red-600 hover:to-red-700 text-white py-2 rounded-lg font-semibold transition mt-2"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      )}
+    {menuOpen && (
+  <div className="fixed top-16 inset-x-0 z-40 sm:hidden">
+    <div className="bg-slate-900/60 backdrop-blur-lg border-b border-slate-700/50">
+      <div className="flex flex-col gap-4 p-4">
+
+        {[
+          { key: "home", label: "Home" },
+          { key: "tv", label: "TV Shows" },
+          { key: "movies", label: "Movies" },
+        ].map((item) => (
+          <button
+            key={item.key}
+            onClick={() => {
+              setActiveTab(item.key)
+              setMenuOpen(false)
+            }}
+            className={`text-left font-medium transition ${
+              activeTab === item.key
+                ? "text-red-400"
+                : "text-white hover:text-red-400"
+            }`}
+          >
+            {item.label}
+          </button>
+        ))}
+
+        <hr className="border-slate-700/50" />
+
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="text-left text-white hover:text-red-400 transition py-2"
+        >
+          Notifications
+        </button>
+
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="text-left text-white hover:text-red-400 transition py-2"
+        >
+          Profile
+        </button>
+
+        <button
+          onClick={() => {
+            handleLogout()
+            setMenuOpen(false)
+          }}
+          className="w-full bg-gradient-to-r from-red-600/80 to-red-700/80
+                     hover:from-red-600 hover:to-red-700
+                     text-white py-2 rounded-lg font-semibold transition mt-2"
+        >
+          Logout
+        </button>
+
+      </div>
+    </div>
+  </div>
+)}
 
       {/* Add padding for header */}
       <div className="pt-1 sm:pt-2">
@@ -809,7 +839,7 @@ const filteredCategories = useMemo(() => {
   }`}
 >
   <Tv size={22} />
-  <span className="text-xs font-semibold">Series</span>
+  <span className="text-xs font-semibold">TV Shows</span>
 </button>
 
           {/* CENTER LOGO BUTTON */}
