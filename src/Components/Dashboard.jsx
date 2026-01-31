@@ -489,7 +489,7 @@ const filteredCategories = useMemo(() => {
     transition-all duration-500 ease-in-out
     ${showHeader ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
     ${lastScrollY > 50
-      ? "bg-slate-900/80 backdrop-blur-xl"
+      ? "bg-slate-900/10 "
       : "bg-transparent"}
   `}
 >
@@ -556,7 +556,7 @@ const filteredCategories = useMemo(() => {
     <div className="relative hidden sm:block">
       <button
         onClick={() => setProfileDropdown(!profileDropdown)}
-        className="text-gray-400 hover:text-red-400 transition rounded-full p-1 hover:bg-slate-700/40"
+        className="text-white hover:text-red-400 transition rounded-full p-1 hover:bg-slate-700/40"
       >
         <User size={20} />
       </button>
@@ -616,7 +616,7 @@ const filteredCategories = useMemo(() => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed top-16 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-lg sm:hidden">
+        <div className="fixed top-16 left-0 right-0 z-40 bg-slate-900/45 backdrop-blur-lg sm:hidden">
           <div className="flex flex-col gap-4 p-4">
             <button className="text-left hover:text-red-400 transition font-medium py-2">
               Home
@@ -645,7 +645,7 @@ const filteredCategories = useMemo(() => {
       )}
 
       {/* Add padding for header */}
-      <div className="pt-14 sm:pt-16">
+      <div className="pt-1 sm:pt-2">
         {/* HERO SLIDER */}
         <div className="relative w-full h-96 sm:h-[500px] overflow-hidden rounded-b-2xl">
           {movies.map((movie, i) => (

@@ -81,10 +81,10 @@ export default function Login() {
   style={{ backgroundImage: "url('/bg-netflix.jpg')" }}
 >
   {/* DARK OVERLAY */}
-    <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/70 to-slate-950/90"></div>
+    <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/40 to-slate-950/40"></div>
 
   {/* HEADER */}
-  <header className="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-xl border-b border-slate-700/40">
+  <header className="fixed top-0 w-full z-50 bg-slate-900/10  border-b border-slate-700/10">
     <div className="flex items-center justify-between px-6 py-4">
       <Link to="/" className="flex items-center">
         <img

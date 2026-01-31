@@ -240,7 +240,7 @@ const [lastScrollY, setLastScrollY] = useState(0);
   }
   ${
     scrollY > 50
-      ? "bg-slate-900/80 backdrop-blur-xl"
+      ? "bg-slate-900/10 "
       : "bg-transparent"
   }`}
 >
