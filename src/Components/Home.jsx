@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight, Search, Bell, Play, Info, Zap, Heart, Users, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import {  Tv, Download, Globe, Baby } from "lucide-react";
 const movies = [
   {
     id: 1,
@@ -102,27 +102,50 @@ const movies = [
     trailer: "https://www.youtube.com/embed/avz06PDqDbM"
   }
 ];
-
 const features = [
   {
-    icon: Zap,
-    title: { en: "Ultra HD Streaming", hi: "अल्ट्रा एचडी स्ट्रीमिंग" },
-    desc: { en: "Experience cinema-quality 4K streaming with zero buffering", hi: "बिना किसी रुकावट के सिनेमा-गुणवत्ता का 4K अनुभव लें" }
+    icon: Tv,
+    title: {
+      en: "Enjoy on your TV",
+      hi: "अपने टीवी पर आनंद लें"
+    },
+    desc: {
+      en: "Watch on Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.",
+      hi: "स्मार्ट टीवी, प्लेस्टेशन, एक्सबॉक्स, क्रोमकास्ट, एप्पल टीवी, ब्लू-रे प्लेयर और अन्य पर देखें।"
+    }
   },
   {
-    icon: Heart,
-    title: { en: "Personalized Picks", hi: "व्यक्तिगत सिफारिशें" },
-    desc: { en: "AI-powered recommendations tailored to your taste", hi: "आपकी पसंद के अनुसार एआई-संचालित सुझाव" }
+    icon: Download,
+    title: {
+      en: "Download to watch offline",
+      hi: "ऑफलाइन देखने के लिए डाउनलोड करें"
+    },
+    desc: {
+      en: "Save your favourites easily and always have something to watch, even without internet.",
+      hi: "अपने पसंदीदा शो आसानी से सेव करें और बिना इंटरनेट के भी देखें।"
+    }
   },
   {
-    icon: Users,
-    title: { en: "Family Profiles", hi: "परिवार प्रोफाइल" },
-    desc: { en: "Create unlimited profiles for your entire family", hi: "अपने पूरे परिवार के लिए असीमित प्रोफाइल बनाएं" }
+    icon: Globe,
+    title: {
+      en: "Watch everywhere",
+      hi: "हर जगह देखें"
+    },
+    desc: {
+      en: "Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.",
+      hi: "फोन, टैबलेट, लैपटॉप और टीवी पर अनलिमिटेड मूवीज़ और शो देखें।"
+    }
   },
   {
-    icon: Sparkles,
-    title: { en: "Exclusive Content", hi: "एक्सक्लूसिव सामग्री" },
-    desc: { en: "Access originals you won't find anywhere else", hi: "एक्सक्लूसिव सामग्री जो कहीं और नहीं मिलेगी" }
+    icon: Baby,
+    title: {
+      en: "Create profiles for kids",
+      hi: "बच्चों के लिए प्रोफाइल बनाएं"
+    },
+    desc: {
+      en: "A safe space just for kids with their favourite characters — free with your membership.",
+      hi: "बच्चों के लिए सुरक्षित जगह, उनके पसंदीदा किरदारों के साथ — बिना किसी अतिरिक्त शुल्क के।"
+    }
   }
 ];
 
@@ -262,12 +285,12 @@ const [lastScrollY, setLastScrollY] = useState(0);
       value={language}
       onChange={(e) => setLanguage(e.target.value)}
       className="bg-slate-800/60 text-white
-      border border-slate-600
+      border border-slate-400
       px-3 sm:px-4 py-2
       text-xs sm:text-sm
       rounded-lg
       outline-none
-      focus:border-red-400
+      focus:border-red-800
       transition"
     >
       <option value="en">English</option>

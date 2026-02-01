@@ -1,55 +1,161 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import api from "../api/axios";
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [language, setLanguage] = useState("en");
+
+  // ---------------- REGISTER ----------------
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
     try {
       await api.post("/register", { email, password });
+
+      // save email for login page
+      localStorage.setItem("preLoginEmail", email);
       navigate("/login");
     } catch (err) {
-      setMessage(err.response?.data?.message || "Error");
+      setMessage(
+        err.response?.data?.message ||
+          (language === "en"
+            ? "Unable to create account"
+            : "खाता बनाने में समस्या")
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white">
-      <form onSubmit={handleRegister} className="bg-slate-900 p-8 rounded w-96">
-        <h2 className="text-2xl mb-4">Sign Up</h2>
+    <div
+      className="min-h-screen text-white flex flex-col bg-cover bg-center relative"
+      style={{ backgroundImage: "url('/bg-netflix.jpg')" }}
+    >
+      {/* OVERLAY */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/40 to-slate-950/40"></div>
 
-        {message && <p className="text-red-400">{message}</p>}
-
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-3 mb-3 bg-slate-800"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-3 mb-4 bg-slate-800"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button className="w-full bg-red-600 py-3 rounded">
-          Register
-        </button>
-
-        <p className="mt-4 text-sm">
-          Already have account?{" "}
-          <Link to="/login" className="text-red-400">
-            Login
+      {/* HEADER */}
+      <header className="fixed top-0 w-full z-50 bg-slate-900/10 border-b border-slate-700/10">
+        <div className="flex items-center justify-between px-6 py-4">
+          <Link to="/" className="flex items-center">
+            <img
+              src="/Logonetflix.png"
+              alt="Netflix"
+              className="h-10 sm:h-12 object-contain"
+              draggable="false"
+            />
           </Link>
-        </p>
-      </form>
+
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="bg-slate-800 border border-slate-600 rounded px-3 py-2 text-sm focus:outline-none"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+          </select>
+        </div>
+      </header>
+
+      {/* CONTENT */}
+      <main className="relative z-10 flex-1 flex items-center justify-center px-4 pt-32 pb-12">
+        <div className="w-full max-w-md bg-slate-900/80 border border-slate-700/50 rounded-2xl p-8 shadow-2xl backdrop-blur">
+
+          <h2 className="text-3xl font-black mb-2">
+            {language === "en" ? "Create Account" : "खाता बनाएं"}
+          </h2>
+
+          <p className="text-sm text-gray-400 mb-6">
+            {language === "en"
+              ? "Join Netflix today"
+              : "आज ही नेटफ्लिक्स से जुड़ें"}
+          </p>
+
+          {message && (
+            <div className="mb-4 p-3 text-sm rounded bg-red-500/10 border border-red-500/40">
+              {message}
+            </div>
+          )}
+
+          <form onSubmit={handleRegister} className="space-y-4">
+            {/* EMAIL */}
+            <div className="relative">
+              <Mail
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+                size={18}
+              />
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full pl-12 pr-4 py-3 rounded bg-slate-800 border border-slate-600 focus:border-red-400 outline-none"
+              />
+            </div>
+
+            {/* PASSWORD */}
+            <div className="relative">
+              <Lock
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+                size={18}
+              />
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full pl-12 pr-12 py-3 rounded bg-slate-800 border border-slate-600 focus:border-red-400 outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((p) => !p)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-400 transition"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+
+            {/* BUTTON */}
+            <button
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-red-600 to-red-700 py-3 rounded font-bold flex items-center justify-center gap-2 disabled:opacity-50 hover:from-red-500 hover:to-red-600 transition"
+            >
+              {loading
+                ? language === "en"
+                  ? "Please wait..."
+                  : "कृपया प्रतीक्षा करें..."
+                : language === "en"
+                ? "Sign Up"
+                : "साइन अप"}
+              <ArrowRight size={18} />
+            </button>
+          </form>
+
+          {/* FOOTER */}
+          <p className="mt-6 text-sm text-center text-gray-400">
+            {language === "en" ? "Already have an account?" : "पहले से खाता है?"}{" "}
+            <span
+              onClick={() => navigate("/login")}
+              className="text-red-400 cursor-pointer hover:text-red-300"
+            >
+              {language === "en" ? "Sign In" : "साइन इन"}
+            </span>
+          </p>
+        </div>
+      </main>
     </div>
   );
 }

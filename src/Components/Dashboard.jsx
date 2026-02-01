@@ -402,6 +402,7 @@ export default function Dashboard() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [activeTab, setActiveTab] = useState("home");
+  
 // home | tv | movies
 
   const scrollRefs = useRef({});

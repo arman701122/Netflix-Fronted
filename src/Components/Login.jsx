@@ -202,7 +202,7 @@ export default function Login() {
             <p className="mt-4 text-gray-400">
               Don't have an account?{" "}
               <span
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/register")}
                 className="text-red-400 cursor-pointer hover:text-red-300"
               >
                 Sign up
