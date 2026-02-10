@@ -209,12 +209,41 @@ export default function Login() {
               </span>
             </p>
 
-            <div className="mt-6 flex justify-center gap-4">
-              <a className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"><Chrome size={20} /></a>
-              <a className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"><Mail size={20} /></a>
-              <a className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"><Twitter size={20} /></a>
-              <a className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"><Github size={20} /></a>
-            </div>
+           <div className="mt-6 flex justify-center gap-4">
+  <a 
+    href="https://chrome.google.com/webstore" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"
+  >
+    <Chrome size={20} />
+  </a>
+  
+  <a 
+    href="mailto:your-email@example.com" 
+    className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"
+  >
+    <Mail size={20} />
+  </a>
+  
+  <a 
+    href="https://twitter.com/your-profile" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"
+  >
+    <Twitter size={20} />
+  </a>
+  
+  <a 
+    href="https://github.com/your-username" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="bg-slate-800 p-3 rounded-full hover:bg-slate-700"
+  >
+    <Github size={20} />
+  </a>
+</div>
           </>
         )}
       </div>
